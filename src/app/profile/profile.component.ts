@@ -9,6 +9,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpParams } from '@angular/common/http';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { AppConstant } from '../app-constants';
 
 var url = "http://localhost:8000/api/";
 
@@ -24,39 +25,214 @@ export class ProfileComponent implements OnInit {
   objRes: any;
   cookieValue: any;
   options: any;
+  num: any;
+  groupName: any;
+  routerObject : any;
+  groupId: any;
+  groupDetailsObject: any;
+  newNameGroup: any;
 
-  constructor(private router: Router, private cookieService: CookieService, private http: HttpClient) {
+
+  contentTitle: any;
+  contentType: any;
+  contentIntro: any;
+  contentDescription: any;
+  contentPolicy: any;
+  contentLocation: any;
+  contentStatus: any;
+  contentLevel: any;
+
+  constructor(private router: Router, private cookieService: CookieService, 
+    private http: HttpClient,
+    public appConstant: AppConstant, 
+) {
     console.log("Constructor is being called");
   }
-  
-  ngOnInit() {
-    this.getUserData();
-  }
 
-  getUserData() {
+
+
+  ngOnInit() {
+
+this.cookieValue = this.cookieService.get('jwt-token');
+this.routerObject = this.router;
+// this.groupId = this.routerObject.rawUrlTree.queryParams.groupId;
+this.loadChildGroupDetails();
+
+   if(!this.cookieValue)
+   {
+   this.router.navigate([""]);
+     
+}
+}
+
+loadChildGroupDetails() {
+  console.log("Loading Group Details");
+
+      const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        'authorization': this.cookieValue
+        // 'authorization': "asdasdsa"
+
+      })
+    };
+this.req = this.http.get(this.appConstant.LoginUrl + '/api/group/find/children' , httpOptions)
+.subscribe  (
+ res => {
+    // alert("Success");
+    this.groupDetailsObject = res;
+    console.log("OBJECT OF GROUP: NAME ", this.groupDetailsObject.data[0]);
+  },
+  err => {
+    alert("Loging Fail");
+  })
+
+
+
+
+
+}
+
+createContentForGroup() {
+
 
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json;charset=utf-8",
-        "Access-Control-Allow-Origin": "*",
-        'authorization': this.cookieService.get('JWT_token')
+        "Content-Type": "application/json",
+        'authorization': this.cookieValue
+        // 'authorization': "asdasdsa"
+
       })
     };
-    let userId = this.cookieService.get('userId');
 
-    this.req = this.http.get(url + 'user/id/' + userId, httpOptions)
-      .subscribe(
-        res => {
-            this.objRes = res;
-            console.log(this.objRes.data);
-        },
-        err => {
-          alert("Wrong User Id");
-          console.log("Error is ");
-          console.log(err);
-          console.log("This much only");
-          console.log("Error Occured in BASIC APi ");
-        })
+    var body = {
+   "groupId": this.groupId,
+    "title": this.contentTitle,
+    "type": this.contentType,
+    "introduction": this.contentIntro,
+    "description": this.contentDescription,
+    "policy": this.contentPolicy,
+    "location": this.contentLocation,
+    "status": this.contentStatus,
+    "level": this.contentLevel
   }
 
+console.log("BOSY IS: " , body);
+
+console.log("BOSY IS: " + body.level);
+this.req = this.http.post(this.appConstant.LoginUrl + '/api/content',JSON.stringify(body), httpOptions)
+.subscribe  (
+ res => {
+    this.objRes = res;
+    // alert("CONTENT CREATED");
+    console.log(this.objRes);
+
+  },
+  err => {
+    alert("Loging Fail");
+  })
+
+
+
+
+
 }
+
+
+updateGroup() {
+  console.log("New name: " + this.newNameGroup + " " + " grp id: " +this.groupId );
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        'authorization': this.cookieValue
+        // 'authorization': "asdasdsa"
+
+      })
+    };
+
+    var body = {
+    "name" : this.newNameGroup,
+    "groupId" : this.groupId 
+  }
+
+this.req = this.http.put(this.appConstant.LoginUrl + '/api/group',JSON.stringify(body), httpOptions)
+.subscribe  (
+ res => {
+    this.objRes = res;
+    // alert(this.objRes.info);
+
+    console.log(this.objRes);
+    this.loadChildGroupDetails();
+
+  },
+  err => {
+    alert("Loging Fail");
+  })
+
+
+
+
+}
+
+setUpdateId(groupId){
+  this.groupId = groupId;
+  console.log("Val of groupId " + this.groupId);
+}
+
+
+addGroup() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        'authorization': this.cookieValue
+        // 'authorization': "asdasdsa"
+
+      })
+    };
+
+    var body = {
+    "name" : this.groupName
+  }
+
+this.req = this.http.post(this.appConstant.LoginUrl + '/api/group',JSON.stringify(body), httpOptions)
+.subscribe  (
+ res => {
+    // alert("Success");
+    this.objRes = res;
+    console.log(this.objRes);
+    this.loadChildGroupDetails();
+  },
+  err => {
+    alert("Loging Fail");
+  })
+}
+
+
+deleteGroup(groupId) {
+     const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        'authorization': this.cookieValue
+        // 'authorization': "asdasdsa"
+
+      })
+    };
+
+    var body = {
+    "name" : this.groupName
+  }
+
+this.req = this.http.delete(this.appConstant.LoginUrl + '/api/group/'+ groupId, httpOptions)
+.subscribe  (
+ res => {
+    this.loadChildGroupDetails();
+  },
+  err => {
+    alert("Del Fail");
+  })
+}
+
+}
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1YjZiM2Q3Mzg4MzI2MDJhZjNhNzgyMzMiLCJncm91cElkIjoiNWI2YzY0YTlmNzkzNWMxMDVlZTUxOThmIiwiaWF0IjoxNTM1Mjg0ODQyLCJleHAiOjE2ODUyODQ4NDJ9.K54tEayTzf3kZjmAHJbfkkTCkqTuQl8EoTq81u9Mzmo
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1YjgyOTYxOGY1YThmNzJlM2Y3NGY4YzMiLCJpYXQiOjE1MzUyODQ5MjAsImV4cCI6MTY4NTI4NDkyMH0.PBPedIZ9K4GufNXe2Lsd7-8RlaWLhuBmoevuzRDZ0Bs

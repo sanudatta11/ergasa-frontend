@@ -11,6 +11,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest,HttpParams } from '@angular/common/http';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
+import { AppConstant } from '../app-constants';
+
+// import { LoginService } from '../services/login.service';
+
+
 var url = "http://localhost:8000/";
 
 @Component({
@@ -23,57 +28,58 @@ export class LoginSignUpComponent implements OnInit {
 
 req:any;
 objRes: any;
-userName: any;
+email: any;
 password:any;
 cookieValue: any;
 options: any;
 
-  constructor(private router: Router, private cookieService: CookieService,private http: HttpClient) { 
+  constructor(
+    private router: Router, 
+    private cookieService: CookieService,
+    private http: HttpClient,     
+    public appConstant: AppConstant, 
+
+) { 
     console.log("Constructor is being called");
   }
 
 
-
-  loginToApp() { 
-console.log(this.userName);
-console.log(this.password);
-
-  const httpOptions = {
+loginToApp()
+{
+  console.log("CLICKED");
+      const httpOptions  = {
   headers: new HttpHeaders({
-    "Content-Type": "application/json;charset=utf-8",
-    "Access-Control-Allow-Origin" : "*"
+     "Content-Type": "application/json"
   })
 };
-var body = {
-  email : this.userName,
-  password: this.password
-};
-console.log(body);
 
- this.req = this.http.post(url+'login',JSON.stringify(body), httpOptions)
+
+var body = {
+     'email' : this.email,
+    'password': this.password,
+}
+console.log("Body : " , body , "httpOptions" , httpOptions);
+this.req = this.http.post(this.appConstant.LoginUrl + '/login',JSON.stringify(body), httpOptions)
 .subscribe  (
  res => {
-    console.log("I am in Good Block");
-   this.objRes = res;
-   console.log(this.objRes);
-   this.cookieService.set( 'JWT_token', this.objRes.token );
-   this.cookieService.set( 'userId', this.objRes.userId );
-   this.cookieValue = this.cookieService.get('JWT_token');
-   console.log("JWT is: " + this.objRes.token + "and the cookie is " + this.cookieValue);
-   this.router.navigate(["profile"]);
+    this.objRes = res;
+    console.log("Response: " , this.objRes.token);
+    this.cookieService.set( 'jwt-token', this.objRes.token );
+    
+    this.router.navigate(["profile"]);
+
   },
   err => {
-    alert("Wrong Email ID or  Password")
-    console.log("Error is ");
-    console.log(err);
-    console.log("This much only");
-    console.log("Error Occured in BASIC APi ");
+    alert("Loging Fail");
   })
-  }
+}
+
  
   ngOnInit() {
-  }
+    // console.log("Have a look" , this.appConstant.LoginUrl);
 
+  }
+ 
   }
 
 

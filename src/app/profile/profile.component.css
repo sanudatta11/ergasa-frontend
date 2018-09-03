@@ -1,0 +1,11 @@
+.container {
+	padding: 20px;
+}
+.table-hover {
+	cursor: pointer;
+	overflow: scroll;
+
+}
+.form-control {
+	margin-bottom: 10px;
+}

@@ -16,11 +16,21 @@ import { RegisterComponent } from './register/register.component';
 
 import { ProfileComponent } from './profile/profile.component';
 
+import { AppConstant } from './app-constants';//application config
+import { HttpModule } from '@angular/http';
+import { RequestOptions } from '@angular/http'//application config
+import { DefaultRequestOptions } from './default-request-options';
+import { DisplayContentComponent } from './display-content/display-content.component';
+
+
+
+
+
 
 
 const routes: Routes = [
-  {path:'', redirectTo:'app', pathMatch:'full'},
-  {path:'login-sign-up',component:LoginSignUpComponent},
+ {path:'', redirectTo:'app', pathMatch:'full'},
+ {path:'login-sign-up',component:LoginSignUpComponent},
  {path:'register' ,component:RegisterComponent },
  {path:'profile',component:ProfileComponent},
  {path:'**',redirectTo:'app'},
@@ -29,12 +39,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    
     LoginSignUpComponent,
     RegisterComponent,
-
-    ProfileComponent
-   
+    ProfileComponent,
+    DisplayContentComponent
   ],
   imports: [
     BrowserModule,
@@ -42,11 +50,11 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FormsModule,
     AngularMultiSelectModule,
-    HttpClientModule
-
-
+    HttpClientModule,
+    HttpModule
   ],
-  providers: [CookieService],
+  providers: [CookieService , AppConstant , 
+        ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

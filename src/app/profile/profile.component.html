@@ -1,86 +1,117 @@
 <div class="container">
-	<div class="row">
-		<div class="col-md-3 ">
-		     <div class="list-group ">
-           <br>
-              <a href="#" class="list-group-item list-group-item-action active">Dashboard</a>
-              <img src="../../assets/images/profile.png" width="250px;">
-              <a href="#" class="list-group-item list-group-item-action active"></a>
-            </div> 
-		</div>
-<div class="col-md-9">
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <h4>Your Profile</h4>
-                    <hr>
-                </div>
-            </div>
-            <div class="row" *ngIf="objRes.data">
-                <div class="col-md-12">
-                    <form>
-                      <div class="form-group row">
-                        <label for="username" class="col-4 col-form-label">User Name</label> 
-                        <div class="col-8">
-                          <input id="username" name="username" placeholder="Username" class="form-control here" required="required" type="text" value="{{objRes.data.username}}">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="name" class="col-4 col-form-label">First Name</label> 
-                        <div class="col-8">
-                          <input id="name" name="name" placeholder="First Name" class="form-control here" type="text" value="{{objRes.data.firstName}}">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="lastname" class="col-4 col-form-label">Last Name</label> 
-                        <div class="col-8">
-                          <input id="lastname" name="lastname" placeholder="Last Name" class="form-control here" type="text" value="{{objRes.data.lastName}}">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="email" class="col-4 col-form-label">Email</label> 
-                        <div class="col-8">
-                          <input id="email" name="email" placeholder="Email" class="form-control here" required="required" type="text" value="{{objRes.data.email}}">
-                        </div>
-                      </div>
-                    
-                      <div class="form-group row">
-                        <label for="text" class="col-4 col-form-label">phone</label> 
-                        <div class="col-8">
-                          <input id="phone" name="phone" placeholder="your number" class="form-control here" required="required" type="number" value="{{objRes.data.phone}}">
-                        </div>
-                      </div>
-                      <label>Gender</label>
-                      <div class="form-check form-check-inline" style="margin-left:220px;">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="male" *ngIf="objRes.data.gender == 'male'" checked>
-                        <label class="form-check-label" for="inlineRadio1" *ngIf="objRes.data.gender == 'male'">male</label>
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="male" *ngIf="objRes.data.gender != 'male'">
-                        <label class="form-check-label" for="inlineRadio1" *ngIf="objRes.data.gender != 'male'">male</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="female" *ngIf="objRes.data.gender == 'female'" checked>
-                        <label class="form-check-label" for="inlineRadio2" *ngIf="objRes.data.gender == 'female'">female</label>
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="female" *ngIf="objRes.data.gender != 'female'">
-                        <label class="form-check-label" for="inlineRadio2" *ngIf="objRes.data.gender != 'female'">female</label>
-                      </div>
-                    
-                      <div class="form-group row">
-                        <label for="newpass" class="col-4 col-form-label">Type</label> 
-                        <div class="col-8">
-                          <input id="type" name="type" placeholder="type" class="form-control here" type="type" value="{{objRes.data.type}}">
-                        </div>
-                      </div> 
-                      <div class="form-group row">
-                        <label for="newpass" class="col-4 col-form-label">UserStatus</label> 
-                        <div class="col-8">
-                          <input id="UserStatus" name="UserStatus" placeholder="UserStatus" class="form-control here" type="number" value="{{objRes.data.userStatus}}">
-                        </div>
-                      </div> 
-                    </form>
-                </div>
-            </div>
-            
-        </div>
+  <div class="row">
+    <div class="col-md-10">
+      <input type="text" name="" class="form-control" [(ngModel)]="groupName" style="width: 100%;" placeholder="Add New Child Group.......">
     </div>
+    <div class="col-md-2">
+    <button class="btn btn-success btn-block" (click) = "addGroup()">Add</button>
+
+    </div>
+  </div>
+
 </div>
+<div class="container">
+    <div class="row">
+    <div class="col-md-8">
+      <h2>My Child Groups</h2> 
+    </div>
+    <div class="col-md-3">
+      <input type="text" name="" class="form-control" style="width: 100%;" placeholder="Search Group Here.......">
+    </div>
+    <div class="col-md-1">
+    <button class="btn btn-sm btn-info btn-block" style="height: 80%">Search</button>
+    
+    </div>
+  </div>
+  <table class="table table-hover">
+
+    <tbody class="text text-center">
+      <tr *ngFor="let eachGroup of groupDetailsObject.data[0]">
+        <td class="text text-center">{{eachGroup.name}}</td>
+        <td>
+          <button class="btn btn-info" type="button" class="btn btn-warning " data-toggle="modal" data-target="#updateNameModal" (click)="setUpdateId(eachGroup._id)">Update</button>
+        </td> 
+        <td>
+          <button class="btn btn-danger" (click)="deleteGroup(eachGroup._id)">Delete</button>
+        </td> 
+         <td>
+            <button type="button" class="btn btn-warning " data-toggle="modal" data-target="#createContentModal" (click)="setUpdateId(eachGroup._id)">Create Content</button>
+        </td> 
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+    <div class="modal fade" id="createContentModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Create Content</h4>
+
+        </div>
+        <div class="modal-body">
+          <input type="" name="" class="form-control" placeholder="Enter Title Here" [(ngModel)]="contentTitle" >
+          <input type="" name="" class="form-control" placeholder="Enter Type Here" [(ngModel)]="contentType" >
+          <input type="" name="" class="form-control" placeholder="Enter Introduction Here" [(ngModel)]="contentIntro" >
+          <textarea #textbox class="form-control" placeholder="Enter Description Here" (change)="contentDescription = textbox.value"  ></textarea>
+          <input type="" name="" class="form-control" placeholder="Enter Policy Here" [(ngModel)]="contentPolicy" >
+          <input type="" name="" class="form-control" placeholder="Enter Location Here" [(ngModel)]="contentLocation" >
+          Status: 
+           <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="UnAvailable" [(ngModel)]="contentStatus">
+            <label class="form-check-label" for="inlineRadio1">UnAvailable</label>
+          </div>
+           <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Available" [(ngModel)]="contentStatus">
+            <label class="form-check-label" for="inlineRadio1">Available</label>
+          </div>
+          <br>
+          Level: 
+           <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Gold" [(ngModel)]="contentLevel">
+            <label class="form-check-label" for="inlineRadio1">Gold</label>
+          </div>
+           <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Silver" [(ngModel)]="contentLevel">
+            <label class="form-check-label" for="inlineRadio1">Silver</label>
+          </div>
+           <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Platinum" [(ngModel)]="contentLevel">
+            <label class="form-check-label" for="inlineRadio1">Platinum</label>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success"  (click)= "createContentForGroup()">Create</button>
+
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+    <div class="modal fade" id="updateNameModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Enter New Name</h4>
+        </div>
+        <div class="modal-body">
+          <input type="" name="" class="form-control" [(ngModel)]="newNameGroup" placeholder="Enter New Name Here">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" (click) = "updateGroup()">Update</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
