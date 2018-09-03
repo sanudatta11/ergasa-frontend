@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row">
+<!--   <div class="row">
     <div class="col-md-10">
       <input type="text" name="" class="form-control" [(ngModel)]="groupName" style="width: 100%;" placeholder="Add New Child Group.......">
     </div>
@@ -7,37 +7,50 @@
     <button class="btn btn-success btn-block" (click) = "addGroup()">Add</button>
 
     </div>
-  </div>
+  </div> -->
 
 </div>
 <div class="container">
     <div class="row">
     <div class="col-md-8">
-      <h2>My Child Groups</h2> 
+      <h2>Batch Invite</h2> 
     </div>
-    <div class="col-md-3">
+  <!--   <div class="col-md-3">
       <input type="text" name="" class="form-control" style="width: 100%;" placeholder="Search Group Here.......">
-    </div>
-    <div class="col-md-1">
+    </div> -->
+<!--     <div class="col-md-1">
     <button class="btn btn-sm btn-info btn-block" style="height: 80%">Search</button>
     
-    </div>
+    </div> -->
   </div>
   <table class="table table-hover">
 
     <tbody class="text text-center">
-      <tr *ngFor="let eachGroup of groupDetailsObject.data[0]">
-        <td class="text text-center">{{eachGroup.name}}</td>
-        <td>
-          <button class="btn btn-info" type="button" class="btn btn-warning " data-toggle="modal" data-target="#updateNameModal" (click)="setUpdateId(eachGroup._id)">Update</button>
-        </td> 
-        <td>
-          <button class="btn btn-danger" (click)="deleteGroup(eachGroup._id)">Delete</button>
-        </td> 
-         <td>
-            <button type="button" class="btn btn-warning " data-toggle="modal" data-target="#createContentModal" (click)="setUpdateId(eachGroup._id)">Create Content</button>
-        </td> 
-      </tr>
+      <div *ngFor="let eachCount of totalEmailCount">
+        <div class="row">
+          <div class="col-md-6">
+             <input type="text" name="" class="form-control" style="width: 100%;" placeholder="Enter name here...">
+          </div>
+           <div class="col-md-6">
+             <input type="text" name="" class="form-control" style="width: 100%;" placeholder="Enter email id here...">
+          </div>
+          <!--  <div class="col-md-2">
+              <button class="btn btn-block btn-danger" (click) = "deleteField(eachCount)">Delete</button>
+          </div> -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+           <button class="btn btn-block btn-primary" (click) = "addMoreInputField()">Add More</button>
+        </div>
+        <div class="col-md-8">
+             <button class="btn btn-block btn-success" (click) = "submitAllData()">Invite All</button>
+        </div>
+      </div>
+     
+    
+
+
     </tbody>
   </table>
 

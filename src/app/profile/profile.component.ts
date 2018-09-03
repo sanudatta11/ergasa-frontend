@@ -42,16 +42,32 @@ export class ProfileComponent implements OnInit {
   contentStatus: any;
   contentLevel: any;
 
+
+totalEmailCount: any;
   constructor(private router: Router, private cookieService: CookieService, 
     private http: HttpClient,
     public appConstant: AppConstant, 
 ) {
     console.log("Constructor is being called");
   }
+addMoreInputField() {
+  let currentCount = this.totalEmailCount.length;
+  currentCount++;
+  this.totalEmailCount.push(currentCount);
+}
 
+deleteField(eachCount) {
+  eachCount--;
+  console.log("Deleting " + this.totalEmailCount[eachCount]);
+   delete this.totalEmailCount[eachCount];
+   console.log("After: " +  " total:  " +  this.totalEmailCount);
+  console.log("Deleting " + this.totalEmailCount[eachCount] + " total:  " +  this.totalEmailCount);
+
+}
 
 
   ngOnInit() {
+    this.totalEmailCount = [1];
 
 this.cookieValue = this.cookieService.get('jwt-token');
 this.routerObject = this.router;
