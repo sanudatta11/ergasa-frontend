@@ -33,15 +33,11 @@ export class ProfileComponent implements OnInit {
   newNameGroup: any;
 
 
-  contentTitle: any;
-  contentType: any;
-  contentIntro: any;
-  contentDescription: any;
-  contentPolicy: any;
-  contentLocation: any;
-  contentStatus: any;
-  contentLevel: any;
+  getAllEmailDetails: any; 
+  getAllNames: any;
+  getAllEmails: any;
 
+  results: any;
 
 totalEmailCount: any;
   constructor(private router: Router, private cookieService: CookieService, 
@@ -65,9 +61,36 @@ deleteField(eachCount) {
 
 }
 
+setNameToInvite(event,count) {
+  this.getAllNames[count]=event.target.value;
+}
+setEmailToInvite(event,count) {
+  this.getAllEmails[count]=event.target.value;
+}
+submitAllData() {
+  let emailList = this.getAllEmails;
+  let nameList = this.getAllNames;
+  for (var i=0;i<this.totalEmailCount.length;i++) {
+    this.results.push({
+      "name": nameList[i],
+      "email" : emailList[i]
+    })
+  }
+
+  // this.results = this.results.toArray();
+  this.results = JSON.stringify(this.results);
+  console.log(typeof(this.results));
+  console.log(this.results);
+}
+
+
 
   ngOnInit() {
     this.totalEmailCount = [1];
+    this.getAllNames = {};
+    this.getAllEmails = {};
+    this.results = [];
+
 
 this.cookieValue = this.cookieService.get('jwt-token');
 this.routerObject = this.router;

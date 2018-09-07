@@ -11,7 +11,7 @@
 // export class LoginService {
 
 //   constructor(
-//   	public http: Http,
+//   	public http: Http, 
 //     public appConstant: AppConstant) { }
 
 //  Login(email, password){

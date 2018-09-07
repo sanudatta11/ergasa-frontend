@@ -70,7 +70,7 @@ this.req = this.http.post(this.appConstant.LoginUrl + '/login',JSON.stringify(bo
 
   },
   err => {
-    alert("Loging Fail");
+    alert("Error");
   })
 }
 

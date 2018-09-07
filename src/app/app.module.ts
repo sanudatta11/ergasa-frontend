@@ -20,20 +20,28 @@ import { AppConstant } from './app-constants';//application config
 import { HttpModule } from '@angular/http';
 import { RequestOptions } from '@angular/http'//application config
 import { DefaultRequestOptions } from './default-request-options';
-import { DisplayContentComponent } from './display-content/display-content.component';
-
-
-
-
-
-
+import { NavbarComponent } from './navbar/navbar.component';
+import { EnterDetailsComponent } from './enter-details/enter-details.component';
+import { MessageTemplateComponent } from './message-template/message-template.component';
+import { LogPageComponent } from './log-page/log-page.component';
+import { ConfigPageComponent } from './config-page/config-page.component';
+import { LeadsDetailsComponent } from './leads-details/leads-details.component';
 
 const routes: Routes = [
- {path:'', redirectTo:'app', pathMatch:'full'},
+ // {path:'', redirectTo:'app', pathMatch:'full'},
  {path:'login-sign-up',component:LoginSignUpComponent},
  {path:'register' ,component:RegisterComponent },
  {path:'profile',component:ProfileComponent},
- {path:'**',redirectTo:'app'},
+ {path:'',component:ProfileComponent},
+ {path:'enter-detail/:id',component:EnterDetailsComponent},
+ {path:'message-template',component:MessageTemplateComponent},
+ {path:'log-page',component:LogPageComponent},
+ {path:'config-page',component:ConfigPageComponent},
+ {path:'leads-details',component:LeadsDetailsComponent},
+
+
+
+ // {path:'**',redirectTo:'app'},
 ];
 
 @NgModule({
@@ -42,7 +50,12 @@ const routes: Routes = [
     LoginSignUpComponent,
     RegisterComponent,
     ProfileComponent,
-    DisplayContentComponent
+    NavbarComponent,
+    EnterDetailsComponent,
+    MessageTemplateComponent,
+    LogPageComponent,
+    ConfigPageComponent,
+    LeadsDetailsComponent
   ],
   imports: [
     BrowserModule,

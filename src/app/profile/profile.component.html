@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="container">
 <!--   <div class="row">
     <div class="col-md-10">
@@ -26,13 +27,13 @@
   <table class="table table-hover">
 
     <tbody class="text text-center">
-      <div *ngFor="let eachCount of totalEmailCount">
+      <div *ngFor="let eachCount of totalEmailCount; index as i" >
         <div class="row">
           <div class="col-md-6">
-             <input type="text" name="" class="form-control" style="width: 100%;" placeholder="Enter name here...">
+             <input type="text" name="" class="form-control" style="width: 100%;" placeholder="Enter name here..." (change)="setNameToInvite($event,i)">
           </div>
            <div class="col-md-6">
-             <input type="text" name="" class="form-control" style="width: 100%;" placeholder="Enter email id here...">
+             <input type="text" name="" class="form-control" style="width: 100%;" placeholder="Enter email id here..." (change)="setEmailToInvite($event,i)">
           </div>
           <!--  <div class="col-md-2">
               <button class="btn btn-block btn-danger" (click) = "deleteField(eachCount)">Delete</button>
@@ -57,74 +58,4 @@
 </div>
 
 
-    <div class="modal fade" id="createContentModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Create Content</h4>
 
-        </div>
-        <div class="modal-body">
-          <input type="" name="" class="form-control" placeholder="Enter Title Here" [(ngModel)]="contentTitle" >
-          <input type="" name="" class="form-control" placeholder="Enter Type Here" [(ngModel)]="contentType" >
-          <input type="" name="" class="form-control" placeholder="Enter Introduction Here" [(ngModel)]="contentIntro" >
-          <textarea #textbox class="form-control" placeholder="Enter Description Here" (change)="contentDescription = textbox.value"  ></textarea>
-          <input type="" name="" class="form-control" placeholder="Enter Policy Here" [(ngModel)]="contentPolicy" >
-          <input type="" name="" class="form-control" placeholder="Enter Location Here" [(ngModel)]="contentLocation" >
-          Status: 
-           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="UnAvailable" [(ngModel)]="contentStatus">
-            <label class="form-check-label" for="inlineRadio1">UnAvailable</label>
-          </div>
-           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Available" [(ngModel)]="contentStatus">
-            <label class="form-check-label" for="inlineRadio1">Available</label>
-          </div>
-          <br>
-          Level: 
-           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Gold" [(ngModel)]="contentLevel">
-            <label class="form-check-label" for="inlineRadio1">Gold</label>
-          </div>
-           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Silver" [(ngModel)]="contentLevel">
-            <label class="form-check-label" for="inlineRadio1">Silver</label>
-          </div>
-           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Platinum" [(ngModel)]="contentLevel">
-            <label class="form-check-label" for="inlineRadio1">Platinum</label>
-          </div>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success"  (click)= "createContentForGroup()">Create</button>
-
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-
-
-    <div class="modal fade" id="updateNameModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Enter New Name</h4>
-        </div>
-        <div class="modal-body">
-          <input type="" name="" class="form-control" [(ngModel)]="newNameGroup" placeholder="Enter New Name Here">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-info" (click) = "updateGroup()">Update</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
