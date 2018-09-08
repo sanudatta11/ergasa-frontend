@@ -26,6 +26,7 @@ import { MessageTemplateComponent } from './message-template/message-template.co
 import { LogPageComponent } from './log-page/log-page.component';
 import { ConfigPageComponent } from './config-page/config-page.component';
 import { LeadsDetailsComponent } from './leads-details/leads-details.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
  // {path:'', redirectTo:'app', pathMatch:'full'},
@@ -38,6 +39,8 @@ const routes: Routes = [
  {path:'log-page',component:LogPageComponent},
  {path:'config-page',component:ConfigPageComponent},
  {path:'leads-details',component:LeadsDetailsComponent},
+ {path:'dashboard',component:DashboardComponent},
+
 
 
 
@@ -55,7 +58,8 @@ const routes: Routes = [
     MessageTemplateComponent,
     LogPageComponent,
     ConfigPageComponent,
-    LeadsDetailsComponent
+    LeadsDetailsComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

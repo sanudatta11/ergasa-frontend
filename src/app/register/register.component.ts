@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit {
   
   
  registerToApp() { 
-
+console.log("CCCCCCCVVVVVVVVVVV " + this.cookieValue);
 
   const httpOptions  = {
   headers: new HttpHeaders({
@@ -69,7 +69,7 @@ var body = {
     "type": this.type,
     "userStatus": this.userStatus,
   }
-this.req = this.http.post(this.appConstant.LoginUrl + '/api/user',JSON.stringify(body), httpOptions)
+this.req = this.http.post(this.appConstant.LoginUrl + '/api/createUser', JSON.stringify(body),httpOptions)
 .subscribe  (
  res => {
     alert("Success Register");
@@ -79,7 +79,8 @@ this.req = this.http.post(this.appConstant.LoginUrl + '/api/user',JSON.stringify
     // console.log(err);
     // console.log("This much only");
     // console.log("Error Occured in BASIC APi ");
-    alert("Error while registering");
+    alert(err);
+    console.log(err);
   })
   }
     ngOnInit() {

@@ -95,7 +95,7 @@ submitAllData() {
 this.cookieValue = this.cookieService.get('jwt-token');
 this.routerObject = this.router;
 // this.groupId = this.routerObject.rawUrlTree.queryParams.groupId;
-this.loadChildGroupDetails();
+// this.loadChildGroupDetails();
 
    if(!this.cookieValue)
    {
@@ -132,50 +132,6 @@ this.req = this.http.get(this.appConstant.LoginUrl + '/api/group/find/children' 
 
 }
 
-createContentForGroup() {
-
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        'authorization': this.cookieValue
-        // 'authorization': "asdasdsa"
-
-      })
-    };
-
-    var body = {
-   "groupId": this.groupId,
-    "title": this.contentTitle,
-    "type": this.contentType,
-    "introduction": this.contentIntro,
-    "description": this.contentDescription,
-    "policy": this.contentPolicy,
-    "location": this.contentLocation,
-    "status": this.contentStatus,
-    "level": this.contentLevel
-  }
-
-console.log("BOSY IS: " , body);
-
-console.log("BOSY IS: " + body.level);
-this.req = this.http.post(this.appConstant.LoginUrl + '/api/content',JSON.stringify(body), httpOptions)
-.subscribe  (
- res => {
-    this.objRes = res;
-    // alert("CONTENT CREATED");
-    console.log(this.objRes);
-
-  },
-  err => {
-    alert("Loging Fail");
-  })
-
-
-
-
-
-}
 
 
 updateGroup() {

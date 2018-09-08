@@ -44,20 +44,22 @@ options: any;
   }
 
 
-loginToApp()
+
+loginToApp(gAuthStatus : any)
 {
+
   console.log("CLICKED");
-      const httpOptions  = {
+  const httpOptions  = {
   headers: new HttpHeaders({
      "Content-Type": "application/json"
   })
 };
-
-
+console.log(gAuthStatus);
 var body = {
      'email' : this.email,
     'password': this.password,
 }
+
 console.log("Body : " , body , "httpOptions" , httpOptions);
 this.req = this.http.post(this.appConstant.LoginUrl + '/login',JSON.stringify(body), httpOptions)
 .subscribe  (
@@ -70,9 +72,10 @@ this.req = this.http.post(this.appConstant.LoginUrl + '/login',JSON.stringify(bo
 
   },
   err => {
-    alert("Error");
+    alert("Loging Fail");
   })
 }
+
 
  
   ngOnInit() {
