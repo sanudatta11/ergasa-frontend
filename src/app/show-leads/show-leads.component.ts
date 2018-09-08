@@ -10,56 +10,51 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest,HttpParams } from '@angular/common/http';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-
 import { AppConstant } from '../app-constants';
 
+
 @Component({
-  selector: 'app-config-page',
-  templateUrl: './config-page.component.html',
-  styleUrls: ['./config-page.component.css']
+  selector: 'app-show-leads',
+  templateUrl: './show-leads.component.html',
+  styleUrls: ['./show-leads.component.css']
 })
-export class ConfigPageComponent implements OnInit {
-	cookieValue: any;
-	req: any;
-	listOfAllConfigs: any;
-  shouldLoadPreLoader: any;
-  value: any;
-	loadAllConfigs() {
-		const httpOptions  = {
+export class ShowLeadsComponent implements OnInit {
+
+  constructor(
+  	private http: HttpClient,
+  	    public appConstant: AppConstant, 
+  	    private cookieService: CookieService,
+  	    ) { }
+  shouldShowPreLoader: any;
+  req: any;
+  listOfAllLeads: any;
+  cookieValue: any;
+
+loadAllLeads() {
+
+  const httpOptions  = {
 	  headers: new HttpHeaders({
 	     "Content-Type": "application/json",
 	     "Authorization" : this.cookieValue
 	  })
 };
+console.log(httpOptions);
 let that = this;
-this.req = this.http.get(this.appConstant.LoginUrl + '/api/getConfig', httpOptions)
+this.req = this.http.get(this.appConstant.LoginUrl + '/api/getAllLeads', httpOptions)
 .subscribe  (
  res => {
-    this.listOfAllConfigs = res;
-    that.shouldLoadPreLoader = false;
+    this.listOfAllLeads = res;
+    that.shouldShowPreLoader = false;
   },
   err => {
     alert("Loading List Failed");
   })
-	}
-
-  updateConfig(event, objectConfig, count) {
-    console.log(this.value[count]);
-    console.log(count);
-    console.log(objectConfig);
-
-  }
-
-  constructor(
-  	  	private http: HttpClient,
-  	    public appConstant: AppConstant, 
-  	    private cookieService: CookieService,
-  	    ) { }
-
+}
   ngOnInit() {
   	this.cookieValue = this.cookieService.get('jwt-token');
-  	this.loadAllConfigs();
-    this.shouldLoadPreLoader = true;
+  	this.shouldShowPreLoader = true;
+  	this.loadAllLeads()
+
   }
 
 }

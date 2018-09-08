@@ -1,5 +1,7 @@
-<h5 class="text"><b>Sales Lead</b></h5>
-          <table class="table">   
+<h5 class="text"><b>List of all sales</b></h5>
+<p  *ngIf="shouldShowPreLoader">Loading all sales.......</p>
+
+          <table class="table" *ngIf="!shouldShowPreLoader">   
             <thead>
               <tr>
                 <th class="text text-center">Lead Name</th>
@@ -9,15 +11,55 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let eachData of [1,2,3,4,5]">
-                <td class="text text-center">Harshit Agarwal</td>
-                <td class="text text-center">{{eachData}}</td>
+              <tr *ngFor="let eachData of listOfLeads">
+                <td class="text text-center">{{eachData.firstName}} {{eachData.lastName}}</td>
+                <td class="text text-center">{{eachData.leads}}</td>
                 <td class="text text-center">
-                  <div class="btn-group">
+                  <button class="btn btn-info" data-toggle="modal" data-target="#salesLeadModal" (click)= "showSalesDetils(eachData._id)">Show Details</button>
+                 <!--  <div class="btn-group">
                 <button type="button" class="btn btn-warning">Edit</button>
                 <button type="button" class="btn btn-danger">Delete</button>
-              </div>
+              </div> -->
                 </td>
               </tr>
             </tbody>
           </table>
+
+<div class="modal fade" id="salesLeadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Sales Detail</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5 class="text text-info">{{managerName}}</h5>
+        <br>
+        <table class="table">   
+            <thead>
+              <tr>
+                <th class="text text-center">Name</th>
+                <th class="text text-center">Number of Leads</th>
+                <th class="text text-center">Phone</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let eachData of listOfAllSaleDetails">
+                <td class="text text-center">{{eachData.firstName}} {{eachData.lastName}}</td>
+                <td class="text text-center">{{eachData.leads}}</td>
+                <td class="text text-center">
+                 {{eachData.phone}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

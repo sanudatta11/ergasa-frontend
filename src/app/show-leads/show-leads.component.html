@@ -1,0 +1,35 @@
+<div class="container">
+	
+		<h5 class="text"><b>List of all leads</b></h5>
+<!-- <p  *ngIf="shouldShowPreLoader">Loading all leads.......</p> -->
+
+          <table class="table" >   
+            <thead>
+              <tr>
+                <th class="text text-center">Name</th>
+                <th class="text text-center">Email</th>
+                <th class="text text-center">Phone</th>
+
+                <th class="text text-center">Email Sent</th>
+                <th class="text text-center">SMS Sent</th>
+
+
+                <th class="text text-center">Number of Leads</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let eachData of listOfAllLeads">
+                <td class="text text-center">{{eachData.firstName}} {{eachData.lastName}}</td>
+                <td class="text text-center">{{eachData.email}}</td>
+                <td class="text text-center">{{eachData.phone}}</td>
+
+                <td class="text text-center">{{eachData.emailLeadSent}}</td>
+                <td class="text text-center">{{eachData.smsLeadSent}}</td>
+
+
+                <td class="text text-center">{{eachData.leads}}</td>
+              </tr>
+            </tbody>
+          </table>			
+
+</div>

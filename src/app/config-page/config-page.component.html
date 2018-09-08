@@ -1,41 +1,15 @@
-<div class="row">
-					<div class="col-xs-4 program-heading">
-						<h5 class="text text-default"><b>TWILLIO_SID</b></h5>
+<div class="row" *ngIf="!shouldLoadPreLoader">
+					<div class="col-xs-4 program-heading" *ngFor="let eachConfig of listOfAllConfigs ; let i=index">
+							<h5 class="text text-default"><b>{{eachConfig.name}}</b></h5>
 						<h6 class="text text-default">Edit your token</h6>
+						<input type="text" name="" [value] = "eachConfig.data">
+						<h6 class="text text-default" style="padding-top: 10px; font-size: 10px; ">
+							{{i}}
+							<button class="btn btn-info btn-sm" (click)="updateConfig(eachConfig,i ,value)">Save</button>
+						</h6>
+					</div>
 
-						<input type="text" name="">
-						<h6 class="text text-default" style="padding-top: 10px; font-size: 10px; ">
-							<button class="btn btn-info btn-sm">Save</button>
-						</h6>
-					</div>
-					<div class="col-xs-4 program-heading">
-							<h5 class="text text-default"><b>TWILLIO_AUTH_TOKEN</b></h5>
-						<h6 class="text text-default">Edit your token</h6>
-
-						<input type="text" name="">
-						
-						<h6 class="text text-default" style="padding-top: 10px; font-size: 10px; ">
-							<button class="btn btn-info btn-sm">Save</button>
-						</h6>
-					</div>
-					<div class="col-xs-4 program-heading">
-							<h5 class="text text-default"><b>SENDGRID_API_KEY</b></h5>
-						<h6 class="text text-default">Edit your token</h6>
-
-						<input type="text" name="">
-						<h6 class="text text-default" style="padding-top: 10px; font-size: 10px; ">
-							<button class="btn btn-info btn-sm">Save</button>
-						</h6>
-					</div>
-					<div class="col-xs-4 program-heading">
-							<h5 class="text text-default"><b>SENDGRID_TEMPLATE_ID</b></h5>
-						<h6 class="text text-default">Edit your token</h6>
-						<input type="text" name="">
-						<h6 class="text text-default" style="padding-top: 10px; font-size: 10px; ">
-							<button class="btn btn-info btn-sm">Save</button>
-						</h6>
-					</div>
-				<!-- 	<div id="rounded-button">
-						<button class="btn btn-success"><span class="glyphicon glyphicon-menu-right"></span></button>
-					</div> -->
-				</div>
+</div>
+<div class="container" style="height: 150px" *ngIf = "shouldLoadPreLoader">
+<h2 >Loading all configs....</h2>
+</div>
