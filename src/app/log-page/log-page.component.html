@@ -1,22 +1,22 @@
-<app-navbar></app-navbar>
-<div class="container">
-	<div class="container">
-  <h2>Logs Admin/User</h2>            
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Serial No</th>
-        <th>Name</th>
-        <th>Log</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let eachLog of [1,2,3,4,5,6,7,8,9]">
-        <td>{{eachLog}}</td>
-        <td>John {{eachLog}}</td>
-        <td>Server Crashed</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-</div>
+<h5 class="text"><b>Admin Log</b></h5>
+          <table class="table">   
+            <thead>
+              <tr>
+                <th class="text text-center">Serial Number</th>
+                <th class="text text-center">Admin Name</th>
+                <th class="text text-center">Log</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let eachData of [1,2,3,4,5,6]">
+                <td class="text text-center">{{eachData}}</td>
+                <td class="text text-center">John</td>
+                <td class="text text-center">
+                  Custom Log {{eachData}}
+                </td>
+              </tr>
+            
+        
+            </tbody>
+          </table>

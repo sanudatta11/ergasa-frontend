@@ -27,6 +27,7 @@ import { LogPageComponent } from './log-page/log-page.component';
 import { ConfigPageComponent } from './config-page/config-page.component';
 import { LeadsDetailsComponent } from './leads-details/leads-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CardsComponent } from './cards/cards.component';
 
 const routes: Routes = [
  // {path:'', redirectTo:'app', pathMatch:'full'},
@@ -59,7 +60,8 @@ const routes: Routes = [
     LogPageComponent,
     ConfigPageComponent,
     LeadsDetailsComponent,
-    DashboardComponent
+    DashboardComponent,
+    CardsComponent
   ],
   imports: [
     BrowserModule,

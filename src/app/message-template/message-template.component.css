@@ -1,0 +1,135 @@
+.side-nav {
+	height:100vh;
+	background-color: #1c1c2b;
+}
+.nav-heading {
+	color: white;
+	padding-top: 5px;
+}
+body {
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+.nav-sub-heading {
+	/*padding: 10px;*/
+	padding-left: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-right: 10px;
+	cursor: hand;
+	color: white;
+	width: 206px;
+}
+.nav-sub-heading:hover {
+	background-color: #2a323f;
+	border-left: 5px solid #f7f32a;
+	cursor: pointer;
+}
+.container {
+	padding-top: 20px;
+}
+.btn-default {
+	
+	font-size: 10px;
+	border-radius: 15px;
+}
+.location-select{
+	padding-top: 5px;
+	font-size: 14px;
+	padding-left: 40px;
+}
+.form-control {
+    padding-left: 30px;
+}
+.form-control + .glyphicon {
+    position: absolute;
+    left: 0;
+    padding: 8px 27px;
+}
+.glyphicon{
+	font-size: 13px;
+}
+
+img {
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+}
+.program-heading {
+/*	box-shadow: 2px 2px 2px 2px #888888;
+	0.5px 0.5px 2px 0.2px #888888;
+*/	
+	color: #2f3033;
+	box-shadow: 0.5px 0.5px 2px 0.2px #888888;
+	width: 370px;
+	height: 255px;
+	margin-left: 50px;
+	padding-top: 10px;
+	padding-left: 25px;
+}
+.program-heading:hover {
+	background-color: #8b95e8;
+	color: white;
+	cursor: pointer;
+}
+.analytics {
+	background-color: #fff9f9;
+	height: 160px;
+	width: 300px;
+	border-left: 2px solid #e1efe9;
+}
+.analytics-left {
+	background-color: #fff9f9;
+	height: 160px;
+	width: 240px;
+	margin-left: 28px;
+}
+.analytics-right {
+	background-color: #fff9f9;
+	height: 160px;
+	width: 240px;
+	margin-right: 29px;
+	border-left: 2px solid #e1efe9;
+}
+.glyphicon-refresh, .glyphicon-bookmark, .glyphicon-tags, .glyphicon-calendar{
+	padding-top: 9px;
+	font-size: 22px;
+	color: #e0d5d5;
+}
+
+table {
+	box-shadow: 0.5px 0.5px 2px 0.2px #888888;
+}
+#myChart {
+height: 270px;
+width: 450px;
+}
+.input-sm {
+	border-radius: 15px;
+}
+tr:hover {
+	background-color: #8b95e8;
+	color: white;
+	cursor: pointer;
+}
+.btn-success {
+border-radius: 60%;
+background: #0f0c29;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+#rounded-button {
+position:fixed;
+top:120px;
+right:35px;
+}
+.btn-danger {
+	background-color: #ef7777;
+}
+.btn-warning {
+	background-color: #fbff9e;
+}
+.dashboard-container {
+	padding: 20px;
+}

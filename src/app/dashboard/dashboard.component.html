@@ -1,134 +1,15 @@
 <app-navbar></app-navbar>
 <div class="dashboard-container">
-		
-				
-				<div class="row" style="margin-top: 20px">
-
-				<div class="col-xs-3 analytics-left">
-					<span class="glyphicon glyphicon-refresh"></span>
-					<br>
-					<h2 class="text text-center"><b>27 hrs</b></h2>
-					<h4 class="text text-center" style="color: #a39c9c">Total Manly Hours</h4>
-
-				</div>
-				<div class="col-xs-3 analytics">
-					<span class="glyphicon glyphicon-bookmark"></span>
-					<br>
-					<h2 class="text text-center"><b>50% </b></h2>
-					<h4 class="text text-center" style="color: #a39c9c">Passed</h4>
-				</div>
-				<div class="col-xs-3 analytics">
-					<span class="glyphicon glyphicon-tags"></span>
-					<br>
-					<h2 class="text text-center"><b>25% </b></h2>
-					<h4 class="text text-center" style="color: #a39c9c">Failed</h4>
-				</div>
-				<div class="col-xs-3 analytics-right">
-					<span class="glyphicon glyphicon-calendar"></span>
-					<br>
-					<h2 class="text text-center"><b>25%</b></h2>
-					<h4 class="text text-center" style="color: #a39c9c">Terminated</h4>
-				</div>
-			</div>
+	<app-cards></app-cards>
 			<br><br>
-			<div class="row">
-					<div class="col-xs-4 program-heading">
-						<h5 class="text text-default"><b>TWILLIO_SID</b></h5>
-						<h6 class="text text-default">Edit your token</h6>
-
-						<input type="text" name="">
-						<h6 class="text text-default" style="padding-top: 10px; font-size: 10px; ">
-							<button class="btn btn-info btn-sm">Save</button>
-						</h6>
-					</div>
-					<div class="col-xs-4 program-heading">
-							<h5 class="text text-default"><b>TWILLIO_AUTH_TOKEN</b></h5>
-						<h6 class="text text-default">Edit your token</h6>
-
-						<input type="text" name="">
-						
-						<h6 class="text text-default" style="padding-top: 10px; font-size: 10px; ">
-							<button class="btn btn-info btn-sm">Save</button>
-						</h6>
-					</div>
-					<div class="col-xs-4 program-heading">
-							<h5 class="text text-default"><b>SENDGRID_API_KEY</b></h5>
-						<h6 class="text text-default">Edit your token</h6>
-
-						<input type="text" name="">
-						<h6 class="text text-default" style="padding-top: 10px; font-size: 10px; ">
-							<button class="btn btn-info btn-sm">Save</button>
-						</h6>
-					</div>
-					<div class="col-xs-4 program-heading">
-							<h5 class="text text-default"><b>SENDGRID_TEMPLATE_ID</b></h5>
-						<h6 class="text text-default">Edit your token</h6>
-						<input type="text" name="">
-						<h6 class="text text-default" style="padding-top: 10px; font-size: 10px; ">
-							<button class="btn btn-info btn-sm">Save</button>
-						</h6>
-					</div>
-				<!-- 	<div id="rounded-button">
-						<button class="btn btn-success"><span class="glyphicon glyphicon-menu-right"></span></button>
-					</div> -->
-				</div>
-				<br>
+				<app-config-page></app-config-page>
+			<br>
 			<div class="row" >
 				<div class="col-md-6">
-					<h5 class="text"><b>Admin Log</b></h5>
-					<table class="table"> 	
-    				<thead>
-      				<tr>
-        				<th class="text text-center">Serial Number</th>
-        				<th class="text text-center">Admin Name</th>
-        				<th class="text text-center">Log</th>
-
-      				</tr>
-    				</thead>
-   				 	<tbody>
-      				<tr *ngFor="let eachData of [1,2,3,4,5,6]">
-        				<td class="text text-center">{{eachData}}</td>
-        				<td class="text text-center">John</td>
-        				<td class="text text-center">
-        					Custom Log {{eachData}}
-        				</td>
-      				</tr>
-      			
-      	
-    				</tbody>
-  				</table>
+					<app-log-page></app-log-page>
 				</div>
 					<div class="col-md-6">
-					<h5 class="text"><b>Sales Lead</b></h5>
-					<table class="table"> 	
-    				<thead>
-      				<tr>
-        				<th class="text text-center">Lead Name</th>
-        				<th class="text text-center">Number of Leads</th>
-        				<th class="text text-center">Action</th>
-
-      				</tr>
-    				</thead>
-   				 	<tbody>
-      				<tr *ngFor="let eachData of [1,2,3,4,5]">
-        				<td class="text text-center">Harshit Agarwal</td>
-        				<td class="text text-center">{{eachData}}</td>
-        				<td class="text text-center">
-        					<div class="btn-group">
-							  <button type="button" class="btn btn-warning">Edit</button>
-							  <button type="button" class="btn btn-danger">Delete</button>
-							</div>
-        				</td>
-      				</tr>
-    				</tbody>
-  				</table>
+					<app-leads-details></app-leads-details>
 				</div>
-			
 			</div>
-				<!-- <h5 class="text"><b>Config Settings</b></h5>
-
-			<div class="container" style="padding-left: 100px;">
-			<app-config-page></app-config-page>
-			</div> -->
-
 </div>

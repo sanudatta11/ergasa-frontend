@@ -1,31 +1,23 @@
-<div class="container">
-	<div class="container">
-  <h2>See Sales</h2>            
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Serial No</th>
-        <th>Name</th>
-        <th>Sales</th>
-        <th>Action</th>
-        <th>Action</th> 
+<h5 class="text"><b>Sales Lead</b></h5>
+          <table class="table">   
+            <thead>
+              <tr>
+                <th class="text text-center">Lead Name</th>
+                <th class="text text-center">Number of Leads</th>
+                <th class="text text-center">Action</th>
 
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let eachLog of [1,2,3,4,5,6,7,8,9]">
-        <td>{{eachLog}}</td>
-        <td>John {{eachLog}}</td>
-        <td>Server {{eachLog}}</td>
-        <td>
-        	<button class="btn btn-warning">Edit</button>
-        </td>
-         <td>
-        	<button class="btn btn-danger">Delete</button>
-        </td>
-
-      </tr>
-    </tbody>
-  </table>
-</div>
-</div>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let eachData of [1,2,3,4,5]">
+                <td class="text text-center">Harshit Agarwal</td>
+                <td class="text text-center">{{eachData}}</td>
+                <td class="text text-center">
+                  <div class="btn-group">
+                <button type="button" class="btn btn-warning">Edit</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+              </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
