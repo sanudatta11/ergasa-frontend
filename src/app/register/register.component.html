@@ -34,6 +34,15 @@
             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="female" [(ngModel)]="gender">
             <label class="form-check-label" for="inlineRadio2">Female</label>
           </div>
+           <select class="custom-select custom-select-sm"  (change)="setEmailTemplate($event)">
+            <option [value] = "0" selected>Select Email Template</option>
+            <option [value]="eachTemplate.templateId" *ngFor="let eachTemplate of listOfEmailTemplates">{{eachTemplate.name}}</option>
+        </select>
+        <br><br>
+        <select class="custom-select custom-select-sm"  (change)="setEmailTemplate($event)">
+            <option [value] = "0" selected>Select SMS Template</option>
+            <option [value]="eachTemplate.templateId" *ngFor="let eachTemplate of listOfSMSTemplates">{{eachTemplate.name}}</option>
+        </select>
           <br>
           <br>
           <div class="form-group">

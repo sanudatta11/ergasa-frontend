@@ -43,10 +43,34 @@ this.req = this.http.get(this.appConstant.LoginUrl + '/api/getConfig', httpOptio
   })
 	}
 
-  updateConfig(event, objectConfig, count) {
-    console.log(this.value[count]);
-    console.log(count);
-    console.log(objectConfig);
+  updateConfig(configObject) {
+
+    let elm = (document.getElementById(configObject.name) as HTMLInputElement);
+    let configId = configObject._id;
+    let configName = configObject.name;
+    let configData = elm.value;
+
+    console.log("ELM VAL " + elm.value  + " config ID " + configId + " configName " + configName);
+      const httpOptions  = {
+        headers: new HttpHeaders({
+           "Content-Type": "application/json",
+           "Authorization" : this.cookieValue
+        })
+    };
+    var body = {
+     'configId':  configId,
+      'name': configName,
+      'data' : configData
+    }
+    this.req = this.http.put(this.appConstant.LoginUrl + '/api/editConfig',JSON.stringify(body) ,httpOptions)
+      .subscribe  (
+       res => {
+         this.loadAllConfigs();
+         alert("Configs Updated");
+        },
+        err => {
+          alert("Loading List Failed");
+        })
 
   }
 

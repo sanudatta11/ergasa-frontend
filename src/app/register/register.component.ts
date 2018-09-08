@@ -34,6 +34,8 @@ export class RegisterComponent implements OnInit {
   userStatus:any;
   cookieValue:any;
   options: any;
+  listOfEmailTemplates: any;
+  listOfSMSTemplates: any;
   
     constructor(private router: Router,
      private cookieService: CookieService,
@@ -43,9 +45,6 @@ export class RegisterComponent implements OnInit {
      ) { 
       console.log("Constructor is being called");
     }
-  
-  
-  
  registerToApp() { 
 console.log("CCCCCCCVVVVVVVVVVV " + this.cookieValue);
 
@@ -83,10 +82,65 @@ this.req = this.http.post(this.appConstant.LoginUrl + '/api/createUser', JSON.st
     console.log(err);
   })
   }
+
+  loadEmailTemplates() {
+      const httpOptions  = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Authorization" : this.cookieValue
+
+      })
+    };
+    this.req = this.http.get(this.appConstant.LoginUrl + '/api/getEmailTemplate',httpOptions)
+    .subscribe  (
+     res => {
+       this.listOfEmailTemplates = res;
+       console.log(this.listOfEmailTemplates);
+
+      },
+      err => {
+        // console.log("Error is ");
+        // console.log(err);
+        // console.log("This much only");
+        // console.log("Error Occured in BASIC APi ");
+        alert(err);
+        console.log(err);
+      })
+
+  }
+
+  loadSMSTemplates() {
+      const httpOptions  = {
+  headers: new HttpHeaders({
+    "Content-Type": "application/json",
+    "Authorization" : this.cookieValue
+
+  })
+};
+
+this.req = this.http.get(this.appConstant.LoginUrl + '/api/getSMSTemplate',httpOptions)
+    .subscribe  (
+     res => {
+       this.listOfSMSTemplates = res;
+       console.log(this.listOfSMSTemplates);
+      },
+      err => {
+        // console.log("Error is ");
+        // console.log(err);
+        // console.log("This much only");
+        // console.log("Error Occured in BASIC APi ");
+        alert(err);
+        console.log(err);
+      })
+  }
+
+
+
     ngOnInit() {
 this.cookieValue = this.cookieService.get('jwt-token');
 console.log("JJJJJJJJJJJWWWWWWWWWTTTTTTTTTTTTT" + this.cookieValue);
-
+this.loadSMSTemplates();
+this.loadEmailTemplates();
    console.log("JWT is: " + this.cookieValue);
    if(!this.cookieValue)
    {

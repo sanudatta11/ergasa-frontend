@@ -2,10 +2,9 @@
 					<div class="col-xs-4 program-heading" *ngFor="let eachConfig of listOfAllConfigs ; let i=index">
 							<h5 class="text text-default"><b>{{eachConfig.name}}</b></h5>
 						<h6 class="text text-default">Edit your token</h6>
-						<input type="text" name="" [value] = "eachConfig.data">
+						<input type="text" name="" [value] = "eachConfig.data" [id]="eachConfig.name">
 						<h6 class="text text-default" style="padding-top: 10px; font-size: 10px; ">
-							{{i}}
-							<button class="btn btn-info btn-sm" (click)="updateConfig(eachConfig,i ,value)">Save</button>
+							<button class="btn btn-info btn-sm" (click)="updateConfig(eachConfig)">Save</button>
 						</h6>
 					</div>
 
