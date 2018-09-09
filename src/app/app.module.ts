@@ -36,7 +36,7 @@ const routes: Routes = [
  {path:'login-sign-up',component:LoginSignUpComponent},
  {path:'register' ,component:RegisterComponent },
  {path:'profile',component:ProfileComponent},
- {path:'',component:ProfileComponent},
+ {path:'',component:LoginSignUpComponent},
  {path:'enter-detail/:id',component:EnterDetailsComponent},
  {path:'message-template',component:MessageTemplateComponent},
  {path:'log-page',component:LogPageComponent},

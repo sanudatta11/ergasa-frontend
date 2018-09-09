@@ -39,8 +39,14 @@
       </div>
     </tbody>
   </table>
+  <h2 class="text text-center text-success">OR</h2>
+  <div style="display: flex; justify-content: center; ">
+    <input type="file" accept=".csv" (change)="csv2Array($event)" >
+    <button class="btn btn-success" (click)="sendAllInvitesFromCSV()">Send All Invites from CSV</button>
 
+  </div>
 </div>
+
 
 
 

@@ -41,9 +41,11 @@ export class ProfileComponent implements OnInit {
   getAllCountryCodes: any;
   getAllPhone:any;
   results: any;
+  fileReaded: any;
 
-
-totalEmailCount: any;
+  dataFromCSV: any;
+  csvResponse: any;
+  totalEmailCount: any;
   constructor(private router: Router, private cookieService: CookieService, 
     private http: HttpClient,
     public appConstant: AppConstant, 
@@ -88,6 +90,7 @@ submitAllData() {
   let countryCodeList = this.getAllCountryCodes;
   let phoneList = this.getAllPhone;
 
+
   for (var i=0;i<this.totalEmailCount.length;i++) {
     this.results.push({
       "email" : emailList[i],
@@ -129,6 +132,103 @@ this.req = this.http.post(this.appConstant.LoginUrl + '/api/inviteByEmails' , JS
 }
 
 
+csv2Array(fileInput: any){
+//read file from input
+this.fileReaded = fileInput.target.files[0];
+
+let reader: FileReader = new FileReader();
+reader.readAsText(this.fileReaded);
+let that = this;
+ reader.onload = (e) => {
+ let csv = reader.result as string;
+ let allTextLines = csv.split(/\r|\n|\r/);
+ let headers = allTextLines[0].split(',');
+ let lines = [];
+
+  for (let i = 0; i < allTextLines.length; i++) {
+    // split content based on comma
+    let data = allTextLines[i].split(',');
+    if (data.length === headers.length) {
+      let tarr = [];
+      for (let j = 0; j < headers.length; j++) {
+        tarr.push(data[j]);
+      }
+
+     // log each row to see output 
+     console.log(tarr);
+     lines.push(tarr);
+  }
+ }
+ // all rows in the csv file 
+ console.log(">>>>>>>>>>>>>>>>>", lines);
+ that.csvResponse = lines;
+} 
+}
+
+sendAllInvitesFromCSV(){
+//   console.log(this.csvResponse);
+
+//   for (var i=0;i<this.csvResponse;i++) {
+//       this.dataFromCSV.push({
+//         "countryCode" : this.csvResponse[i][0],
+//       })
+//   }
+// console.log(this.dataFromCSV);
+//    const httpOptions = {
+//       headers: new HttpHeaders({
+//         "Content-Type": "application/json",
+//         'authorization': this.cookieValue
+//         // 'authorization': "asdasdsa"
+
+//       })
+//     };
+
+// console.log(this.csvResponse[0][0]);
+// console.log(this.csvResponse);
+let csvResponseObject = this.csvResponse;
+console.log("Have a look at my size: " + csvResponseObject.length);
+let that = this;
+for(let i=0;i<csvResponseObject.length;i++) {
+  that.dataFromCSV.push({
+      "countryCode" : csvResponseObject[i][0],
+      "email" : csvResponseObject[i][1],
+      "firstName": csvResponseObject[i][2],
+      "lastName" : csvResponseObject[i][3],
+      "phone": csvResponseObject[i][4],
+  })
+}
+console.log(this.dataFromCSV);
+
+
+
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        'authorization': this.cookieValue
+      })
+    };
+
+
+     var body = {
+    "datas" : this.dataFromCSV
+  }
+this.req = this.http.post(this.appConstant.LoginUrl + '/api/inviteByEmails' , JSON.stringify(body),httpOptions)
+.subscribe  (
+ res => {
+    alert("Success All!");
+    
+  },
+  err => {
+    alert("Loging Fail");
+  })
+
+
+}
+
+
+
+
 
   ngOnInit() {
     this.totalEmailCount = [1];
@@ -139,6 +239,7 @@ this.req = this.http.post(this.appConstant.LoginUrl + '/api/inviteByEmails' , JS
     this.getAllCountryCodes = {};
     this.getAllPhone = {};
     this.results = [];
+    this.dataFromCSV = [];
 
 
 this.cookieValue = this.cookieService.get('jwt-token');
