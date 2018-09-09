@@ -7,26 +7,31 @@
             <thead>
               <tr>
                 <th class="text text-center">Name</th>
-                <th class="text text-center">Email</th>
-                <th class="text text-center">Phone</th>
-
-                <th class="text text-center">Email Sent</th>
-                <th class="text text-center">SMS Sent</th>
-
-
+                <th class="text text-center">Lead By</th>
+                <th class="text text-center">Created At</th>
                 <th class="text text-center">Number of Leads</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let eachData of listOfAllLeads">
                 <td class="text text-center">{{eachData.firstName}} {{eachData.lastName}}</td>
-                <td class="text text-center">{{eachData.email}}</td>
-                <td class="text text-center">{{eachData.phone}}</td>
+                <td class="text text-center" *ngIf="eachData.leadByReference">
+                  {{eachData.leadByReference.firstName}} {{eachData.leadByReference.lastName}} <span class="badge badge-warning">Lead</span>
 
-                <td class="text text-center">{{eachData.emailLeadSent}}</td>
-                <td class="text text-center">{{eachData.smsLeadSent}}</td>
+                </td>
+                <td class="text text-center" *ngIf=" !eachData.leadByReference">
+                  {{eachData.leadBy.firstName}} {{eachData.leadBy.lastName}}
+                </td>
+                <!-- <ng-template #leadName>
+                </ng-template>
+ -->
+                <td class="text text-center">{{eachData.createdAt | date:'medium'  }}</td>
+              <!--   <td class="text text-center">
+                  {{ eachData.createdAt | date [ : format [ : timezone [ : locale ] ] ] }}
+                </td> -->
 
-
+<!-- console.log(ts.);
+ -->
                 <td class="text text-center">{{eachData.leads}}</td>
               </tr>
             </tbody>
