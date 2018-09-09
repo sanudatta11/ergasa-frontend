@@ -1,43 +1,32 @@
 <app-navbar></app-navbar>
 <div class="container">
-<!--   <div class="row">
-    <div class="col-md-10">
-      <input type="text" name="" class="form-control" [(ngModel)]="groupName" style="width: 100%;" placeholder="Add New Child Group.......">
-    </div>
-    <div class="col-md-2">
-    <button class="btn btn-success btn-block" (click) = "addGroup()">Add</button>
-
-    </div>
-  </div> -->
-
 </div>
 <div class="container">
     <div class="row">
     <div class="col-md-8">
       <h2>Batch Invite</h2> 
     </div>
-  <!--   <div class="col-md-3">
-      <input type="text" name="" class="form-control" style="width: 100%;" placeholder="Search Group Here.......">
-    </div> -->
-<!--     <div class="col-md-1">
-    <button class="btn btn-sm btn-info btn-block" style="height: 80%">Search</button>
-    
-    </div> -->
   </div>
   <table class="table table-hover">
 
     <tbody class="text text-center">
       <div *ngFor="let eachCount of totalEmailCount; index as i" >
         <div class="row">
-          <div class="col-md-6">
-             <input type="text" name="" class="form-control" style="width: 100%;" placeholder="Enter name here..." (change)="setNameToInvite($event,i)">
+          <div class="col-md-4">
+             <input type="text" name="" class="form-control" style="width: 100%;" placeholder="Enter Email here..." (change)="setEmailToInvite($event,i)">
           </div>
-           <div class="col-md-6">
-             <input type="text" name="" class="form-control" style="width: 100%;" placeholder="Enter email id here..." (change)="setEmailToInvite($event,i)">
+           <div class="col-md-2">
+             <input type="text" name="" class="form-control" style="width: 100%;" placeholder="First Name..." (change)="setFirstNameToInvite($event,i)">
           </div>
-          <!--  <div class="col-md-2">
-              <button class="btn btn-block btn-danger" (click) = "deleteField(eachCount)">Delete</button>
-          </div> -->
+          <div class="col-md-2">
+             <input type="text" name="" class="form-control" style="width: 100%;" placeholder="Last Name..." (change)="setLastNameToInvite($event,i)">
+          </div>
+          <div class="col-md-2">
+             <input type="text" name="" class="form-control" style="width: 100%;" placeholder="Phone..." (change)="setPhoneToInvite($event,i)">
+          </div>
+          <div class="col-md-2">
+             <input type="text" name="" class="form-control" style="width: 100%;" placeholder="Country Code..." (change)="setCountryCodeInvite($event,i)">
+          </div>
         </div>
       </div>
       <div class="row">
@@ -48,10 +37,6 @@
              <button class="btn btn-block btn-success" (click) = "submitAllData()">Invite All</button>
         </div>
       </div>
-     
-    
-
-
     </tbody>
   </table>
 

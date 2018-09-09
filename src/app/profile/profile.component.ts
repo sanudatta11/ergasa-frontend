@@ -36,8 +36,12 @@ export class ProfileComponent implements OnInit {
   getAllEmailDetails: any; 
   getAllNames: any;
   getAllEmails: any;
-
+  getAllFirstNames:any;
+  getAllSecondNames: any;
+  getAllCountryCodes: any;
+  getAllPhone:any;
   results: any;
+
 
 totalEmailCount: any;
   constructor(private router: Router, private cookieService: CookieService, 
@@ -61,26 +65,67 @@ deleteField(eachCount) {
 
 }
 
-setNameToInvite(event,count) {
-  this.getAllNames[count]=event.target.value;
-}
 setEmailToInvite(event,count) {
   this.getAllEmails[count]=event.target.value;
 }
+setPhoneToInvite(event,count) {
+  this.getAllPhone[count]=event.target.value;
+}
+setFirstNameToInvite(event,count) {
+  this.getAllFirstNames[count] = event.target.value;
+}
+setLastNameToInvite(event, count) {
+  this.getAllSecondNames[count] = event.target.value;
+}
+setCountryCodeInvite(event, count) {
+  this.getAllCountryCodes[count] = event.target.value;
+}
 submitAllData() {
+
   let emailList = this.getAllEmails;
-  let nameList = this.getAllNames;
+  let firstNameList=  this.getAllFirstNames;
+  let lastNameList = this.getAllSecondNames;
+  let countryCodeList = this.getAllCountryCodes;
+  let phoneList = this.getAllPhone;
+
   for (var i=0;i<this.totalEmailCount.length;i++) {
     this.results.push({
-      "name": nameList[i],
-      "email" : emailList[i]
+      "email" : emailList[i],
+      "firstName": firstNameList[i],
+      "lastName" : lastNameList[i],
+      "phone": phoneList[i],
+      "countryCode": countryCodeList[i]
     })
   }
 
   // this.results = this.results.toArray();
-  this.results = JSON.stringify(this.results);
+  this.results = this.results;
   console.log(typeof(this.results));
   console.log(this.results);
+
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        'authorization': this.cookieValue
+        // 'authorization': "asdasdsa"
+
+      })
+    };
+     var body = {
+    "datas" : this.results
+  }
+this.req = this.http.post(this.appConstant.LoginUrl + '/api/inviteByEmails' , JSON.stringify(body),httpOptions)
+.subscribe  (
+ res => {
+    alert("Success");
+    
+  },
+  err => {
+    alert("Loging Fail");
+  })
+
+
 }
 
 
@@ -89,6 +134,10 @@ submitAllData() {
     this.totalEmailCount = [1];
     this.getAllNames = {};
     this.getAllEmails = {};
+    this.getAllFirstNames = {};
+    this.getAllSecondNames = {};
+    this.getAllCountryCodes = {};
+    this.getAllPhone = {};
     this.results = [];
 
 

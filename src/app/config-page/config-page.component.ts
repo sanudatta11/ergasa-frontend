@@ -24,6 +24,7 @@ export class ConfigPageComponent implements OnInit {
 	listOfAllConfigs: any;
   shouldLoadPreLoader: any;
   value: any;
+  typeOfUser: any;
 	loadAllConfigs() {
 		const httpOptions  = {
 	  headers: new HttpHeaders({
@@ -39,7 +40,7 @@ this.req = this.http.get(this.appConstant.LoginUrl + '/api/getConfig', httpOptio
     that.shouldLoadPreLoader = false;
   },
   err => {
-    alert("Loading List Failed");
+    console.log("Loading List Failed");
   })
 	}
 
@@ -69,7 +70,7 @@ this.req = this.http.get(this.appConstant.LoginUrl + '/api/getConfig', httpOptio
          alert("Configs Updated");
         },
         err => {
-          alert("Loading List Failed");
+          console.log("Loading List Failed");
         })
 
   }
@@ -82,6 +83,8 @@ this.req = this.http.get(this.appConstant.LoginUrl + '/api/getConfig', httpOptio
 
   ngOnInit() {
   	this.cookieValue = this.cookieService.get('jwt-token');
+    console.log("cookie after login: " + this.cookieValue );
+    this.typeOfUser = this.cookieService.get('type-of-user');
   	this.loadAllConfigs();
     this.shouldLoadPreLoader = true;
   }

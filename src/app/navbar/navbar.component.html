@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md bg-primary navbar-dark">
-  <a class="navbar-brand" href="#">Jonas Gym</a>
+  <a class="navbar-brand" href="#">Jonas Gym | {{typeOfAccount}}</a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -13,24 +13,22 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/register" routerLinkActive="active">Create User</a>
       </li>
-      <li class="nav-item">
+   <!--    <li class="nav-item">
         <a class="nav-link" routerLink="/login-sign-up" routerLinkActive="active">Login</a>
-      </li>
+      </li> -->
       <li class="nav-item">
         <a class="nav-link" routerLink="/message-template" routerLinkActive="active">Message Template</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
       </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" routerLink="/log-page" routerLinkActive="active">Logs</a>
-      </li> -->
-      <!-- <li class="nav-item">
-        <a class="nav-link" routerLink="/config-page" routerLinkActive="active">Config</a>
-      </li> -->
-     <!--  <li class="nav-item">
-        <a class="nav-link" routerLink="/leads-details" routerLinkActive="active">Sales Lead</a>
-      </li> -->
+       <li class="nav-item">
+        <a class="nav-link" routerLink="/login-sign-up" routerLinkActive="active" (click)="logoutUser()">Logout</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/admin-portal" routerLinkActive="active" *ngIf="this.typeOfAccount=='Admin'">Admin Portal</a>
+      </li>
+
 
 
     </ul>

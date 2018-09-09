@@ -34,6 +34,11 @@ export class LeadsDetailsComponent implements OnInit {
  managerName: any;
  listOfAllSaleDetails: any
 
+ typeOfUser: any;
+ getSalesUserData: any;
+ listOfSelfSales: any;
+
+
  showSalesDetils(id) {
    console.log("Id is : " + id);
     const httpOptions  = {
@@ -58,6 +63,26 @@ this.req = this.http.get(this.appConstant.LoginUrl + '/api/getSalesUserDetail/' 
   })
 
  }
+ deleteUser(userID) {
+     const httpOptions  = {
+        headers: new HttpHeaders({
+           "Content-Type": "application/json",
+           "Authorization" : this.cookieValue
+        })
+    };
+
+
+ this.req = this.http.get(this.appConstant.LoginUrl + '/api/deleteUser/' + userID, httpOptions)
+.subscribe  (
+ res => {
+   this.getAllSales();
+  },
+  err => {
+    alert("Loading List Failed");
+  })
+
+
+ }
 getAllSales()
 {
 
@@ -80,11 +105,41 @@ this.req = this.http.get(this.appConstant.LoginUrl + '/api/getAllSales', httpOpt
   })
 }
 
+loadSelfDetails() {
+
+  const httpOptions  = {
+    headers: new HttpHeaders({
+       "Content-Type": "application/json",
+       "Authorization" : this.cookieValue
+    })
+};
+let that = this;
+this.req = this.http.get(this.appConstant.LoginUrl + '/api/getSalesSelfDetail', httpOptions)
+.subscribe  (
+ res => {
+    this.getSalesUserData = res;
+    this.listOfSelfSales = this.getSalesUserData.leadRefObj;
+    console.log(this.listOfSelfSales);
+    that.shouldShowPreLoader = false;
+  },
+  err => {
+    alert("Loading List Failed");
+  })
+
+
+
+}
+
   ngOnInit() {
+    this.typeOfUser = this.cookieService.get('type-of-user');
   	this.cookieValue = this.cookieService.get('jwt-token');
   	this.shouldShowPreLoader = true;
   	console.log("Val of cookie in the comp: " + this.cookieValue);
-  	this.getAllSales();
+    if(this.typeOfUser == 1) {
+      this.getAllSales();
+    } else if (this.typeOfUser ==2 ){
+        this.loadSelfDetails();
+    }
   }
 
 }

@@ -1,0 +1,69 @@
+<app-navbar></app-navbar>
+<br><br>
+<div class="container">
+	<div class="row">
+	<div class="col-md-3">
+		<input type="text" name="" placeholder="First Name ..." [(ngModel)]="adminFirstName"> <br><br>
+		<input type="text" name="" placeholder="Last Name..." [(ngModel)]="adminLastName"> <br><br>
+		<input type="number" name="" placeholder="Phone Number..." [(ngModel)]="adminPhoneNumber"> <br><br>
+		<input type="text" name="" placeholder="Email..." [(ngModel)]="adminEmail"> <br><br>
+		<input type="password" name="" placeholder="Password..." [(ngModel)]="adminPassword"> <br><br>
+		<input type="text" name="" placeholder="Gender" [(ngModel)]="adminGender"> <br><br>
+		<button class="btn btn-success" (click) = "createAdmin()">Create Admin</button>
+	</div>
+	<div class="col-md-9">
+		 <table class="table">   
+            <thead>
+              <tr>
+                <th class="text text-center">Admin Name</th>
+                <th class="text text-center">Email</th>
+                <th class="text text-center">Leads</th>
+                <th class="text text-center">Actions</th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let eachData of listOfAllAdmins">
+                <td class="text text-center">{{eachData.firstName}} {{eachData.lastName}}</td>
+                <td class="text text-center">{{eachData.email}}</td>
+
+                <td class="text text-center">{{eachData.leads}}</td>
+                <td class="text text-center">
+                	<button class="btn btn-info" data-toggle="modal" data-target="#adminEdit" (click) = "editAdminDetails(eachData._id)">Edit</button>
+                </td>
+
+              
+              
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="modal fade" id="adminEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Edit Admin Detail</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<div class="container">
+		<input type="text" name="" placeholder="First Name ..." [(ngModel)]="adminFirstNameEdit"> <br><br>
+		<input type="text" name="" placeholder="Last Name..." [(ngModel)]="adminLastNameEdit"> <br><br>
+		<input type="number" name="" placeholder="Phone Number..." [(ngModel)]="adminPhoneNumberEdit"> <br><br>
+		<input type="password" name="" placeholder="Password..." [(ngModel)]="adminPasswordEdit"> <br><br>
+		<input type="text" name="" placeholder="Gender" [(ngModel)]="adminGenderEdit"> <br><br>
+		<button class="btn btn-success" (click) = "updateAdminDetails()">Update Admin</button>
+	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+	</div>
+</div>
+</div>

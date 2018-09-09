@@ -67,6 +67,9 @@ this.req = this.http.post(this.appConstant.LoginUrl + '/login',JSON.stringify(bo
     this.objRes = res;
     console.log("Response: " , this.objRes.token);
     this.cookieService.set( 'jwt-token', this.objRes.token );
+    console.log("cookie during login: " +this.objRes.token  );
+    this.cookieService.set( 'type-of-user', this.objRes.typeOfUser );
+
     
     this.router.navigate(["dashboard"]);
 

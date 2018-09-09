@@ -36,7 +36,13 @@ export class RegisterComponent implements OnInit {
   options: any;
   listOfEmailTemplates: any;
   listOfSMSTemplates: any;
-  
+  typeOfUser: any;
+
+  emailTemplateId: any;
+  smsTemplateId: any;
+  timeOfSubscription: any;
+  countryCode: any;
+
     constructor(private router: Router,
      private cookieService: CookieService,
      private http: HttpClient,
@@ -45,6 +51,20 @@ export class RegisterComponent implements OnInit {
      ) { 
       console.log("Constructor is being called");
     }
+
+setEmailTemplate(event) {
+  this.emailTemplateId = event.target.value;
+  console.log(this.emailTemplateId);
+};
+setSMSTemplate(event) {
+  this.smsTemplateId = event.target.value;
+  console.log(this.smsTemplateId);
+
+}
+
+
+
+
  registerToApp() { 
 console.log("CCCCCCCVVVVVVVVVVV " + this.cookieValue);
 
@@ -68,6 +88,8 @@ var body = {
     "type": this.type,
     "userStatus": this.userStatus,
   }
+
+
 this.req = this.http.post(this.appConstant.LoginUrl + '/api/createUser', JSON.stringify(body),httpOptions)
 .subscribe  (
  res => {
@@ -81,6 +103,48 @@ this.req = this.http.post(this.appConstant.LoginUrl + '/api/createUser', JSON.st
     alert(err);
     console.log(err);
   })
+  }
+
+  registerToAppLeads() {
+
+
+  const httpOptions  = {
+  headers: new HttpHeaders({
+    "Content-Type": "application/json",
+    "Authorization" : this.cookieValue
+
+  })
+};
+
+var body = {
+    "firstName": this.fName,
+    "lastName": this.lName,
+    "email": this.email,
+    "phone":this.number,
+    "smsTemplateId" : this.smsTemplateId,
+    "emailTemplateId": this.emailTemplateId,
+    "timeOfSubscription": this.timeOfSubscription,
+    "countryCode" : this.countryCode
+  }
+
+  console.log(body);
+
+  this.req = this.http.post(this.appConstant.LoginUrl + '/api/createUser', JSON.stringify(body),httpOptions)
+.subscribe  (
+ res => {
+    alert("Success Register");
+  },
+  err => {
+    // console.log("Error is ");
+    // console.log(err);
+    // console.log("This much only");
+    // console.log("Error Occured in BASIC APi ");
+    alert(err);
+    console.log(err);
+  })
+
+
+
   }
 
   loadEmailTemplates() {
@@ -137,6 +201,9 @@ this.req = this.http.get(this.appConstant.LoginUrl + '/api/getSMSTemplate',httpO
 
 
     ngOnInit() {
+
+  this.typeOfUser = this.cookieService.get('type-of-user');
+
 this.cookieValue = this.cookieService.get('jwt-token');
 console.log("JJJJJJJJJJJWWWWWWWWWTTTTTTTTTTTTT" + this.cookieValue);
 this.loadSMSTemplates();

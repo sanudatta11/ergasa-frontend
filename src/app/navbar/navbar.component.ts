@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cookieService: CookieService,
+) { }
+  typeOfAccount: any;
+logoutUser(){
+	console.log("CLICKED");
+	this.cookieService.deleteAll();
 
+}
   ngOnInit() {
+  	if(this.cookieService.get('type-of-user')=='1') {
+  		 this.typeOfAccount = "Admin"
+  	}
+  	else if (this.cookieService.get('type-of-user')=='2') {
+  		this.typeOfAccount = "Sales"
+  	}
+
   }
+
 
 }

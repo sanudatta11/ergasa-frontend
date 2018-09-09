@@ -29,6 +29,7 @@ import { LeadsDetailsComponent } from './leads-details/leads-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CardsComponent } from './cards/cards.component';
 import { ShowLeadsComponent } from './show-leads/show-leads.component';
+import { AdminPortalComponent } from './admin-portal/admin-portal.component';
 
 const routes: Routes = [
  // {path:'', redirectTo:'app', pathMatch:'full'},
@@ -42,10 +43,7 @@ const routes: Routes = [
  {path:'config-page',component:ConfigPageComponent},
  {path:'leads-details',component:LeadsDetailsComponent},
  {path:'dashboard',component:DashboardComponent},
-
-
-
-
+ {path:'admin-portal',component:AdminPortalComponent},
  // {path:'**',redirectTo:'app'},
 ];
 
@@ -63,7 +61,8 @@ const routes: Routes = [
     LeadsDetailsComponent,
     DashboardComponent,
     CardsComponent,
-    ShowLeadsComponent
+    ShowLeadsComponent,
+    AdminPortalComponent
   ],
   imports: [
     BrowserModule,

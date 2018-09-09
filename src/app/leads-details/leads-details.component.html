@@ -1,12 +1,16 @@
-<h5 class="text"><b>List of all sales</b></h5>
+<h5 class="text" *ngIf="typeOfUser==1"><b>List of all sales</b></h5>
+<h5 class="text" *ngIf="typeOfUser==2"><b>Sales of {{getSalesUserData.salesUserObj.firstName}} {{getSalesUserData.salesUserObj.lastName}} </b></h5>
 <p  *ngIf="shouldShowPreLoader">Loading all sales.......</p>
 
-          <table class="table" *ngIf="!shouldShowPreLoader">   
+          <div *ngIf="typeOfUser==1">
+            <table class="table" *ngIf="!shouldShowPreLoader">   
             <thead>
               <tr>
                 <th class="text text-center">Lead Name</th>
                 <th class="text text-center">Number of Leads</th>
                 <th class="text text-center">Action</th>
+                <th class="text text-center">Delete</th>
+
 
               </tr>
             </thead>
@@ -16,14 +20,36 @@
                 <td class="text text-center">{{eachData.leads}}</td>
                 <td class="text text-center">
                   <button class="btn btn-info" data-toggle="modal" data-target="#salesLeadModal" (click)= "showSalesDetils(eachData._id)">Show Details</button>
-                 <!--  <div class="btn-group">
-                <button type="button" class="btn btn-warning">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-              </div> -->
+                </td>
+                 <td class="text text-center">
+                  <button class="btn btn-danger" (click)= "deleteUser(eachData._id)">Delete</button>
                 </td>
               </tr>
             </tbody>
           </table>
+          </div>
+
+ <div *ngIf="typeOfUser==2">
+            <br>
+            <table class="table" *ngIf="!shouldShowPreLoader">   
+            <thead>
+              <tr>
+                <th class="text text-center">Lead Name</th>
+                <th class="text text-center">Leads</th>
+                <th class="text text-center">Phone</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let eachData of listOfSelfSales">
+                <td class="text text-center">{{eachData.firstName}} {{eachData.lastName}}</td>
+                <td class="text text-center">{{eachData.leads}}</td>
+                <td class="text text-center">{{eachData.phone}}</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+
+
 
 <div class="modal fade" id="salesLeadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
