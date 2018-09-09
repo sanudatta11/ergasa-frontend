@@ -31,6 +31,7 @@ countryCode: any;
 
 userId: any;
 salesId: any;
+showSuccessPage: any;
 
 
   constructor(
@@ -56,7 +57,7 @@ getUserInfo() {
     this.salesId = this.userDetails.leadBy;
   },
   err => {
-    alert("Admin listing failed");
+    alert("Error in loading.");
   })
 }
 
@@ -87,20 +88,24 @@ registerUserFromReference() {
       this.req = this.http.post(this.appConstant.LoginUrl + '/createOnReference',JSON.stringify(body), httpOptions)
 .subscribe  (
  res => {
-   alert("Success");
+   // alert("Success");
+   this.showSuccessPage = true;
   },
   err => {
-    alert("Admin creation failed");
+    alert("Error in registering");
   })
 
 }
 
   ngOnInit() {
+    this.showSuccessPage = false;
   	console.log(this.router.url);
   	this.idOfUser = this.router.url.split('/');
   	this.idOfUser = this.idOfUser[2];
     console.log("FINAL ID IS: " + this.idOfUser);
     this.getUserInfo();
+    window.scrollBy(0, 500);
+
 
   }
 

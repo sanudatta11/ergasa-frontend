@@ -11,9 +11,6 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpParams } from
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AppConstant } from '../app-constants';
 
-var url = "http://localhost:8000/api/";
-
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -100,19 +97,26 @@ submitAllData() {
       "countryCode": countryCodeList[i]
     })
   }
+  this.results.forEach( function (eachObj){
+    for (let key in eachObj) {
+        if (eachObj.hasOwnProperty(key)){
+           console.log(key,eachObj[key]);
+           if(eachObj[key]=="" || eachObj[key]==undefined) {
+             alert(key + " Missing. Please fill it to send the mail");
+
+           }
+        }
+    }
+});
 
   // this.results = this.results.toArray();
   this.results = this.results;
   console.log(typeof(this.results));
   console.log(this.results);
-
-
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         'authorization': this.cookieValue
-        // 'authorization': "asdasdsa"
-
       })
     };
      var body = {
@@ -121,21 +125,17 @@ submitAllData() {
 this.req = this.http.post(this.appConstant.LoginUrl + '/api/inviteByEmails' , JSON.stringify(body),httpOptions)
 .subscribe  (
  res => {
-    alert("Success");
+    alert("Mails sent successfully");
     
   },
   err => {
-    alert("Loging Fail");
+    console.log("Mail Sent Failed");
   })
-
-
 }
-
 
 csv2Array(fileInput: any){
 //read file from input
 this.fileReaded = fileInput.target.files[0];
-
 let reader: FileReader = new FileReader();
 reader.readAsText(this.fileReaded);
 let that = this;
@@ -166,25 +166,6 @@ let that = this;
 }
 
 sendAllInvitesFromCSV(){
-//   console.log(this.csvResponse);
-
-//   for (var i=0;i<this.csvResponse;i++) {
-//       this.dataFromCSV.push({
-//         "countryCode" : this.csvResponse[i][0],
-//       })
-//   }
-// console.log(this.dataFromCSV);
-//    const httpOptions = {
-//       headers: new HttpHeaders({
-//         "Content-Type": "application/json",
-//         'authorization': this.cookieValue
-//         // 'authorization': "asdasdsa"
-
-//       })
-//     };
-
-// console.log(this.csvResponse[0][0]);
-// console.log(this.csvResponse);
 let csvResponseObject = this.csvResponse;
 console.log("Have a look at my size: " + csvResponseObject.length);
 let that = this;
@@ -198,18 +179,12 @@ for(let i=0;i<csvResponseObject.length;i++) {
   })
 }
 console.log(this.dataFromCSV);
-
-
-
-
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         'authorization': this.cookieValue
       })
     };
-
-
      var body = {
     "datas" : this.dataFromCSV
   }
@@ -217,19 +192,11 @@ this.req = this.http.post(this.appConstant.LoginUrl + '/api/inviteByEmails' , JS
 .subscribe  (
  res => {
     alert("Success All!");
-    
   },
   err => {
     alert("Loging Fail");
   })
-
-
 }
-
-
-
-
-
   ngOnInit() {
     this.totalEmailCount = [1];
     this.getAllNames = {};
@@ -240,18 +207,14 @@ this.req = this.http.post(this.appConstant.LoginUrl + '/api/inviteByEmails' , JS
     this.getAllPhone = {};
     this.results = [];
     this.dataFromCSV = [];
-
-
-this.cookieValue = this.cookieService.get('jwt-token');
-this.routerObject = this.router;
+    this.cookieValue = this.cookieService.get('jwt-token');
+    this.routerObject = this.router;
 // this.groupId = this.routerObject.rawUrlTree.queryParams.groupId;
 // this.loadChildGroupDetails();
-
    if(!this.cookieValue)
    {
    this.router.navigate([""]);
-     
-}
+   }
 }
 
 loadChildGroupDetails() {
@@ -262,7 +225,6 @@ loadChildGroupDetails() {
         "Content-Type": "application/json",
         'authorization': this.cookieValue
         // 'authorization': "asdasdsa"
-
       })
     };
 this.req = this.http.get(this.appConstant.LoginUrl + '/api/group/find/children' , httpOptions)
@@ -275,14 +237,7 @@ this.req = this.http.get(this.appConstant.LoginUrl + '/api/group/find/children' 
   err => {
     alert("Loging Fail");
   })
-
-
-
-
-
 }
-
-
 
 updateGroup() {
   console.log("New name: " + this.newNameGroup + " " + " grp id: " +this.groupId );
@@ -295,7 +250,6 @@ updateGroup() {
 
       })
     };
-
     var body = {
     "name" : this.newNameGroup,
     "groupId" : this.groupId 
@@ -314,17 +268,12 @@ this.req = this.http.put(this.appConstant.LoginUrl + '/api/group',JSON.stringify
   err => {
     alert("Loging Fail");
   })
-
-
-
-
 }
 
 setUpdateId(groupId){
   this.groupId = groupId;
   console.log("Val of groupId " + this.groupId);
 }
-
 
 addGroup() {
     const httpOptions = {
@@ -335,7 +284,6 @@ addGroup() {
 
       })
     };
-
     var body = {
     "name" : this.groupName
   }
@@ -352,7 +300,6 @@ this.req = this.http.post(this.appConstant.LoginUrl + '/api/group',JSON.stringif
     alert("Loging Fail");
   })
 }
-
 
 deleteGroup(groupId) {
      const httpOptions = {
