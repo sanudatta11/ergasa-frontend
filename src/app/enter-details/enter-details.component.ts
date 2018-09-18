@@ -96,10 +96,27 @@ registerUserFromReference() {
   })
 
 }
+loginSignUp() {
+  let URLParams = this.router.url.split('?');
+  console.log("DOOM" + URLParams[1]);
 
+  
+
+
+ this.req = this.http.get('https://ergasi-nodejs.cfapps.us10.hana.ondemand.com/oauth/linkedin?' +URLParams[1] )
+.subscribe  (
+ res => {
+   // alert("Success");
+   alert("SUCCESS");
+  },
+  err => {
+    alert("Error in registering");
+  })
+}
   ngOnInit() {
     // this.showSuccessPage = false;
   	console.log("Router is: " + this.router.url);
+    this.loginSignUp();
   	// this.idOfUser = this.router.url.split('/');
   	// this.idOfUser = this.idOfUser[2];
    //  console.log("FINAL ID IS: " + this.idOfUser);
