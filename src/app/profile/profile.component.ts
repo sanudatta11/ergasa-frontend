@@ -29,6 +29,8 @@ export class ProfileComponent implements OnInit {
   groupDetailsObject: any;
   newNameGroup: any;
 
+  currentLanguage: any;
+
 
   getAllEmailDetails: any; 
   getAllNames: any;
@@ -209,6 +211,7 @@ this.req = this.http.post(this.appConstant.LoginUrl + '/api/inviteByEmails' , JS
     this.dataFromCSV = [];
     this.cookieValue = this.cookieService.get('jwt-token');
     this.routerObject = this.router;
+    this.currentLanguage = "hebrew";
 // this.groupId = this.routerObject.rawUrlTree.queryParams.groupId;
 // this.loadChildGroupDetails();
    if(!this.cookieValue)

@@ -38,12 +38,8 @@ export class AdminPortalComponent implements OnInit {
     listOfAllAdmins: any;
     adminUserId: any;
 
-    adminUserIdEdit:any;
-    adminFirstNameEdit: any;
-adminLastNameEdit: any;
-adminPasswordEdit: any;
-adminPhoneNumberEdit: any;
-adminGenderEdit: any;
+    listOfCompanies: any;
+
 
 
     createAdmin() {
@@ -68,32 +64,31 @@ adminGenderEdit: any;
       this.req = this.http.post(this.appConstant.LoginUrl + '/api/createAdmin',JSON.stringify(body), httpOptions)
 .subscribe  (
  res => {
-   this.loadAllAdminDetails();
+   // this.loadAllAdminDetails();
   },
   err => {
     alert("Admin creation failed");
   })
     }
 
- loadAllAdminDetails() {
+ loadAllCompanies() {
    const httpOptions  = {
         headers: new HttpHeaders({
            "Content-Type": "application/json",
-            "Authorization" : this.cookieValue
+            // "Authorization" : this.cookieValue
 
         })
       };
 
- this.req = this.http.get(this.appConstant.LoginUrl + '/api/getAllAdmin', httpOptions)
+ this.req = this.http.get('https://ergasi-nodejs.cfapps.us10.hana.ondemand.com/api/getCompany', httpOptions)
 .subscribe  (
  res => {
-   this.listOfAllAdmins = res;
-   console.log(this.listOfAllAdmins);
+   this.listOfCompanies = res;
+   // console.log(this.Fapp);
   },
   err => {
-    alert("Admin listing failed");
+    alert("Company listing failed");
   })
-
  }
 
  editAdminDetails(userId) {
@@ -111,29 +106,27 @@ adminGenderEdit: any;
       };
 
       var body = {
-        "userId" : this.adminUserId,
-        'firstName' : this.adminFirstNameEdit,
-        'lastName': this.adminLastNameEdit,
-        'password' : this.adminPasswordEdit,
-        'phone' : this.adminPhoneNumberEdit,
-        'gender' : this.adminGenderEdit
+        // "userId" : this.adminUserId,
+        // 'firstName' : this.adminFirstNameEdit,
+        // 'lastName': this.adminLastNameEdit,
+        // 'password' : this.adminPasswordEdit,
+        // 'phone' : this.adminPhoneNumberEdit,
+        // 'gender' : this.adminGenderEdit
 }
    this.req = this.http.put(this.appConstant.LoginUrl + '/api/editAdmin  ',JSON.stringify(body), httpOptions)
 .subscribe  (
  res => {
-   this.loadAllAdminDetails();
+   // this.loadAllAdminDetails();
   },
   err => {
     alert("Admin creation failed");
   })
-
-
-
  }
 
   ngOnInit() {
-     this.cookieValue = this.cookieService.get('jwt-token');
-     this.loadAllAdminDetails();
+     // this.cookieValue = this.cookieService.get('jwt-token');
+     // this.loadAllCompanies();
+     this.loadAllCompanies();
   }
 
 }

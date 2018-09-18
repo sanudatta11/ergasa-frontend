@@ -3,8 +3,9 @@
 </div>
 <div class="container">
     <div class="row">
-    <div class="col-md-8">
-      <h2>Batch Invite</h2> 
+    <div class="col-md-12">
+      <h2 *ngIf="currentLanguage=='english'">Batch Invite</h2> 
+      <h2 *ngIf="currentLanguage =='hebrew' " style="float: right;">הזמנה לאצווה</h2> 
     </div>
   </div>
   <table class="table table-hover">
@@ -30,11 +31,13 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4">
-           <button class="btn btn-block btn-primary" (click) = "addMoreInputField()">Add More</button>
+        <div class="col-md-4" >
+           <button class="btn btn-block btn-primary" (click) = "addMoreInputField()" *ngIf="currentLanguage=='english'">Add More</button>
+           <button class="btn btn-block btn-primary" (click) = "addMoreInputField()" *ngIf="currentLanguage=='hebrew'">הוסף עוד</button>
         </div>
         <div class="col-md-8">
-             <button class="btn btn-block btn-success" (click) = "submitAllData()">Invite All</button>
+             <button class="btn btn-block btn-success" (click) = "submitAllData()" *ngIf="currentLanguage=='english'">Invite All</button>
+             <button class="btn btn-block btn-success" (click) = "submitAllData()" *ngIf="currentLanguage=='hebrew'">הזמן את כל</button>
         </div>
       </div>
     </tbody>

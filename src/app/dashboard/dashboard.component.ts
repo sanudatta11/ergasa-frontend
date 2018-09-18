@@ -12,10 +12,11 @@ export class DashboardComponent implements OnInit {
   constructor(private cookieService: CookieService) { }
   cookieValue: any;
   typeOfUser : any;
+  pieChartData: any;
   ngOnInit() {
 	this.cookieValue = this.cookieService.get('jwt-token');
 	this.typeOfUser = this.cookieService.get('type-of-user');
-
+   
 	console.log("Type of user: " + this.typeOfUser);
   }
 

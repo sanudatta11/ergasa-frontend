@@ -25,6 +25,11 @@ export class ConfigPageComponent implements OnInit {
   shouldLoadPreLoader: any;
   value: any;
   typeOfUser: any;
+
+  codeChefDetailsObject: any;
+  fiverrDetailsObject: any;
+
+  codeChefUser: any;
 	loadAllConfigs() {
 		const httpOptions  = {
 	  headers: new HttpHeaders({
@@ -74,7 +79,48 @@ this.req = this.http.get(this.appConstant.LoginUrl + '/api/getConfig', httpOptio
         })
 
   }
+loadCodeChefdata() {
+    const httpOptions  = {
+        headers: new HttpHeaders({
+           "Content-Type": "application/json",
+           // "Authorization" : this.cookieValue
+        })
+    };
 
+     this.req = this.http.get('https://ergasi-nodejs.cfapps.us10.hana.ondemand.com/api/getCodechefProfile/sanurocks5',httpOptions)
+      .subscribe  (
+       res => {
+           this.codeChefDetailsObject = res;
+           console.log("Codechef success");
+           console.log(this.codeChefDetailsObject);
+        },
+        err => {
+          console.log("Codechef failed");
+        })
+
+
+}
+loadFiverrData() {
+    const httpOptions  = {
+        headers: new HttpHeaders({
+           "Content-Type": "application/json",
+           // "Authorization" : this.cookieValue
+        })
+    };
+
+     this.req = this.http.get('https://ergasi-nodejs.cfapps.us10.hana.ondemand.com/api/getFiverrProfile/soumyajitdutta',httpOptions)
+      .subscribe  (
+       res => {
+           this.fiverrDetailsObject = res;
+           console.log("Fiverr success");
+           console.log(this.fiverrDetailsObject);
+        },
+        err => {
+          console.log("Fiverr failed");
+        })
+
+
+}
   constructor(
   	  	private http: HttpClient,
   	    public appConstant: AppConstant, 
@@ -86,6 +132,8 @@ this.req = this.http.get(this.appConstant.LoginUrl + '/api/getConfig', httpOptio
     console.log("cookie after login: " + this.cookieValue );
     this.typeOfUser = this.cookieService.get('type-of-user');
   	this.loadAllConfigs();
+    this.loadCodeChefdata();
+    this.loadFiverrData();
     this.shouldLoadPreLoader = true;
   }
 

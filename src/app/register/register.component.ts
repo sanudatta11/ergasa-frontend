@@ -43,6 +43,11 @@ export class RegisterComponent implements OnInit {
   timeOfSubscription: any;
   countryCode: any;
 
+  companyName: any;
+  companyAbout: any;
+  companyYear: any;
+  companyFunding: any;
+
     constructor(private router: Router,
      private cookieService: CookieService,
      private http: HttpClient,
@@ -65,32 +70,26 @@ setSMSTemplate(event) {
 
 
 
- registerToApp() { 
+ createNewCompany() { 
 console.log("CCCCCCCVVVVVVVVVVV " + this.cookieValue);
 
   const httpOptions  = {
   headers: new HttpHeaders({
     "Content-Type": "application/json",
-    "Authorization" : this.cookieValue
+    // "Authorization" : this.cookieValue
 
   })
 };
-
+// oneDashURL
 
 var body = {
-    "username": this.username,
-    "firstName": this.fName,
-    "lastName": this.lName,
-    "email": this.email,
-    "password": this.password,
-    "phone":this.number,
-    "gender":  this.gender,
-    "type": this.type,
-    "userStatus": this.userStatus,
+    "name": this.companyName,
+    "about": this.companyAbout,
+    "yearFounded": this.companyYear,
+    "funding": this.companyFunding,
   }
 
-
-this.req = this.http.post(this.appConstant.LoginUrl + '/api/createUser', JSON.stringify(body),httpOptions)
+this.req = this.http.post(this.appConstant.oneDashURL + 'api/createCompany', JSON.stringify(body),httpOptions)
 .subscribe  (
  res => {
     alert("Success Register");

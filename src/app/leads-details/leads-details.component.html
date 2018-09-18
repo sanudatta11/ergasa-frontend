@@ -1,56 +1,38 @@
-<h5 class="text" *ngIf="typeOfUser==1"><b>List of all sales</b></h5>
-<h5 class="text" *ngIf="typeOfUser==2"><b>Sales of {{getSalesUserData.salesUserObj.firstName}} {{getSalesUserData.salesUserObj.lastName}} </b></h5>
-<p  *ngIf="shouldShowPreLoader">Loading all sales.......</p>
+<h5 class="text" ><b>GitHub Performance Report</b> 
+ <span class="badge badge-warning">Total Repo {{gitHubRepoCount}}</span>
+ <span class="badge badge-warning">Followers {{githubFollowers}}</span>
+ 
 
-          <div *ngIf="typeOfUser==1">
-            <table class="table" *ngIf="!shouldShowPreLoader">   
+
+</h5>
+
+
+<p  *ngIf="shouldShowPreLoader">Loading all sales.......</p>
+<br>
+            <table class="table table-wrapper-scroll-y" *ngIf="!shouldShowPreLoader">   
             <thead>
               <tr>
-                <th class="text text-center">Sales Name</th>                
-                <th class="text text-center">Number of Leads</th>
-                <th class="text text-center">Action</th>
-                <th class="text text-center">Delete</th>
-
-
+                <th class="text text-center">Title  </th>                
+                <th class="text text-center">State</th>
+                <th class="text text-center">Repo</th>
+                <th class="text text-center">Created At</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let eachData of listOfLeads">
-                <td class="text text-center">{{eachData.firstName}} {{eachData.lastName}}</td>
-                <td class="text text-center">{{eachData.leads}}</td>
+              <tr *ngFor="let eachData of githubRepo">
+                <td class="text text-center">{{eachData.title}} </td>
+                <td class="text text-center">{{eachData.state}}</td>
                 <td class="text text-center">
-                  <button class="btn btn-info" data-toggle="modal" data-target="#salesLeadModal" (click)= "showSalesDetils(eachData._id)">Show Details</button>
+                  <!-- <button class="btn btn-info btn-sm" onclick="window.location.href=`eachData.repository_url`">Show Repository</button> -->
+                   <span class="badge badge-success"><a href={{eachData.html_url}} style="color: white" target="_blank">Repo Link</a></span>
+                  <!-- <a href={{eachData.html_url}}>Repo Link</a> -->
                 </td>
                  <td class="text text-center">
-                  <button class="btn btn-danger" (click)= "deleteUser(eachData._id)">Delete</button>
+                  {{eachData.created_at | date:'medium'}}
                 </td>
               </tr>
             </tbody>
           </table>
-          </div>
-
- <div *ngIf="typeOfUser==2">
-            <br>
-            <table class="table" *ngIf="!shouldShowPreLoader">   
-            <thead>
-              <tr>
-                <th class="text text-center">Client Name</th>
-                <th class="text text-center">Leads</th>
-                <th class="text text-center">Phone</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let eachData of listOfSelfSales">
-                <td class="text text-center">{{eachData.firstName}} {{eachData.lastName}}</td>
-                <td class="text text-center">{{eachData.leads}}</td>
-                <td class="text text-center">{{eachData.phone}}</td>
-              </tr>
-            </tbody>
-          </table>
-          </div>
-
-
-
 <div class="modal fade" id="salesLeadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -61,7 +43,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <h5 class="text text-info">{{managerName}}</h5>
+        <h5 class="text text-info"></h5>
         <br>
         <table class="table">   
             <thead>
@@ -72,7 +54,7 @@
 
               </tr>
             </thead>
-            <tbody>
+        <!--     <tbody>
               <tr *ngFor="let eachData of listOfAllSaleDetails">
                 <td class="text text-center">{{eachData.firstName}} {{eachData.lastName}}</td>
                 <td class="text text-center">{{eachData.leads}}</td>
@@ -80,7 +62,7 @@
                  {{eachData.phone}}
                 </td>
               </tr>
-            </tbody>
+            </tbody> -->
           </table>
       </div>
       <div class="modal-footer">

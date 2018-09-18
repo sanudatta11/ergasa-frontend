@@ -1,23 +1,26 @@
-<h5 class="text"><b>Admin Log</b></h5>
+<h5 class="text"><b>Code Forces Involvement</b>
+ <span class="badge badge-warning">Best Rating: {{bestCodeForcesRating}}</span>
+ <span class="badge badge-warning">Best Rank: {{bestCodeForcesRank}}</span>
+</h5>
+<google-chart [data]="pieChartData"></google-chart>
 <br>
-          <table class="table">   
+          <table class="table table-wrapper-scroll-y  ">   
             <thead>
               <tr>
-                <th class="text text-center">Serial Number</th>
-                <th class="text text-center">Admin Name</th>
-                <th class="text text-center">Log</th>
-
+                <th class="">Contest Name</th>
+                <th class=" text-center">Rank</th>
+                <th class="">Rating</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let eachData of [1,2,3,4,5,6]">
-                <td class="text text-center">{{eachData}}</td>
-                <td class="text text-center">John</td>
-                <td class="text text-center">
-                  Custom Log {{eachData}}
+              <tr *ngFor="let eachData of codeForcesData">
+                <td class="">{{eachData.contestName}}</td>
+                <td class=" text-center">{{eachData.rank}}</td>
+                <td class="">
+                 {{eachData.newRating}}
                 </td>
               </tr>
-            
-        
             </tbody>
+
           </table>
+

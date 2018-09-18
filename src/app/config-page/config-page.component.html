@@ -1,4 +1,4 @@
-<div class="row" *ngIf="!shouldLoadPreLoader">
+<!-- <div class="row" *ngIf="!shouldLoadPreLoader">
 					<div class="col-xs-4 program-heading" *ngFor="let eachConfig of listOfAllConfigs ; let i=index">
 							<h5 class="text text-default"><b>{{eachConfig.name}}</b></h5>
 						<h6 class="text text-default">Edit your token</h6>
@@ -13,4 +13,91 @@
 <div class="container" style="height: 150px" *ngIf = "shouldLoadPreLoader">
 <h2 >Loading all configs....</h2>
 </div>
+</div> -->
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">CodeChef Performance
+        <span class="badge badge-success">Country Rank: {{codeChefDetailsObject.countryRank}}</span>
+        <span class="badge badge-success">Global Rank: {{codeChefDetailsObject.globalRank}}</span>
+        </h5>
+
+<table class="table table-bordered">
+	<thead>
+    <tr>
+      <th scope="col">Challenge Name</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Global Rank</th>
+      <th scope="col">Country Rank</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Long Challenge</td>
+      <td>{{codeChefDetailsObject.longChallenge.rating}}</td>
+      <td>{{codeChefDetailsObject.longChallenge.globalRank}}</td>
+      <td>{{codeChefDetailsObject.longChallenge.countryRank}}</td>
+    </tr>
+    <tr>
+       <td>Cook Off  Challenge</td>
+      <td>{{codeChefDetailsObject.cookOffChallenge.rating}}</td>
+      <td>{{codeChefDetailsObject.cookOffChallenge.globalRank}}</td>
+      <td>{{codeChefDetailsObject.cookOffChallenge.countryRank}}</td>
+    </tr>
+    <tr>
+      <td>Lunch Time Challenge</td>
+       <td>{{codeChefDetailsObject.lunchtimeChallenge.rating}}</td>
+      <td>{{codeChefDetailsObject.lunchtimeChallenge.globalRank}}</td>
+      <td>{{codeChefDetailsObject.lunchtimeChallenge.countryRank}}</td>
+    </tr>
+  </tbody>
+</table>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6" style="height: 200px; "  >
+    <div class="card">
+      <div class="card-body" style="height: 288px;">
+        <h5 class="card-title">Fiverr Profile Performance
+            <span class="badge badge-success">Average Rating :  {{fiverrDetailsObject.avgReview}}</span>
+            <span class="badge badge-warning">Rating Count :  {{fiverrDetailsObject.reviewers.length}}</span>
+        </h5>
+        <br>
+       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+     <div class="carousel-item active" >
+     {{fiverrDetailsObject.reviews[0]}}
+     <br>
+     <br>
+     <i>--- By {{fiverrDetailsObject.reviewers[0]}}</i>
+    </div>
+    <div class="carousel-item "  *ngFor="let eachData of fiverrDetailsObject.reviews; index as i">
+     {{eachData}} 
+       <br>
+       <br>
+     <i>--- By {{fiverrDetailsObject.reviewers[i+1]}}</i>
+     <br>
+    </div>
+  </div>
+  <button class="btn-danger" href="#carouselExampleIndicators" style="background-color: green; position: relative;  cursor: pointer;" role="button" data-slide="next">Next</button>
+ <!--  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"> -->
+    <!-- <span class="carousel-control-prev-icon btn-success" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a> -->
+ <!--  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon btn-success" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a> -->
+</div>
+      </div>
+    </div>
+  </div>
 </div>

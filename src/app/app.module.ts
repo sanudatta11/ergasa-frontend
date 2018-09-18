@@ -31,6 +31,17 @@ import { CardsComponent } from './cards/cards.component';
 import { ShowLeadsComponent } from './show-leads/show-leads.component';
 import { AdminPortalComponent } from './admin-portal/admin-portal.component';
 
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+   
+
+import {
+    SocialLoginModule,
+    AuthServiceConfig,
+    LinkedinLoginProvider
+} from "angular5-social-auth"
+
+
+
 const routes: Routes = [
  // {path:'', redirectTo:'app', pathMatch:'full'},
  {path:'login-sign-up',component:LoginSignUpComponent},
@@ -46,7 +57,18 @@ const routes: Routes = [
  {path:'admin-portal',component:AdminPortalComponent},
  // {path:'**',redirectTo:'app'},
 ];
-
+// Configs 
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+      [
+         {
+          id: LinkedinLoginProvider.PROVIDER_ID,
+          provider: new LinkedinLoginProvider('814yacdk68651y')
+        },
+      ]
+  );
+  return config;
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +84,8 @@ const routes: Routes = [
     DashboardComponent,
     CardsComponent,
     ShowLeadsComponent,
-    AdminPortalComponent
+    AdminPortalComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -71,9 +94,17 @@ const routes: Routes = [
     FormsModule,
     AngularMultiSelectModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    SocialLoginModule,
+    Ng2GoogleChartsModule
   ],
-  providers: [CookieService , AppConstant , 
+  providers: [
+  CookieService, 
+  AppConstant, 
+  {
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
+   }
         ],
   bootstrap: [AppComponent]
 })

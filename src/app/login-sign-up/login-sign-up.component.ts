@@ -13,6 +13,12 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 
 import { AppConstant } from '../app-constants';
 
+import {
+    AuthService,
+    GoogleLoginProvider,
+    LinkedinLoginProvider
+} from 'angular5-social-auth';
+
 // import { LoginService } from '../services/login.service';
 
 
@@ -32,49 +38,68 @@ email: any;
 password:any;
 cookieValue: any;
 options: any;
-
+socialPlatformProvider:any;
   constructor(
     private router: Router, 
     private cookieService: CookieService,
     private http: HttpClient,     
     public appConstant: AppConstant, 
+    private socialAuthService: AuthService
 
 ) { 
     console.log("Constructor is being called");
   }
 
+   public socialSignIn(socialPlatform : string) {
+     console.log("Hello");
+     if(socialPlatform == "linkedin"){
+       console.log(socialPlatform);
+      this.socialPlatformProvider = LinkedinLoginProvider.PROVIDER_ID;
+      console.log("LOGGING: " + this.socialPlatformProvider + " "   + LinkedinLoginProvider.PROVIDER_ID);
+    }
+    console.log("T1");
+    this.socialAuthService.signIn(this.socialPlatformProvider).then(
+      (userData) => {
+        console.log(socialPlatform+" sign in data : " , userData);
+        // Now sign-in with userData
+            
+      }
+    );
+  }
+  
 
 
-loginToApp(gAuthStatus : any)
-{
 
-  console.log("CLICKED");
-  const httpOptions  = {
-  headers: new HttpHeaders({
-     "Content-Type": "application/json"
-  })
-};
-console.log(gAuthStatus);
-var body = {
-     'email' : this.email,
-    'password': this.password,
-}
+// loginToApp(gAuthStatus : any)
+// {
 
-console.log("Body : " , body , "httpOptions" , httpOptions);
-this.req = this.http.post(this.appConstant.LoginUrl + '/login',JSON.stringify(body), httpOptions)
-.subscribe  (
- res => {
-    this.objRes = res;
-    console.log("Response: " , this.objRes.token);
-    this.cookieService.set( 'jwt-token', this.objRes.token );
-    console.log("cookie during login: " +this.objRes.token  );
-    this.cookieService.set( 'type-of-user', this.objRes.typeOfUser );
-    this.router.navigate(["dashboard"]);
-  },
-  err => {
-    alert("Loging Fail");
-  })
-}
+//   console.log("CLICKED");
+//   const httpOptions  = {
+//   headers: new HttpHeaders({
+//      "Content-Type": "application/json"
+//   })
+// };
+// console.log(gAuthStatus);
+// var body = {
+//      'email' : this.email,
+//     'password': this.password,
+// }
+
+// console.log("Body : " , body , "httpOptions" , httpOptions);
+// this.req = this.http.post(this.appConstant.LoginUrl + '/login',JSON.stringify(body), httpOptions)
+// .subscribe  (
+//  res => {
+//     this.objRes = res;
+//     console.log("Response: " , this.objRes.token);
+//     this.cookieService.set( 'jwt-token', this.objRes.token );
+//     console.log("cookie during login: " +this.objRes.token  );
+//     this.cookieService.set( 'type-of-user', this.objRes.typeOfUser );
+//     this.router.navigate(["dashboard"]);
+//   },
+//   err => {
+//     alert("Loging Fail");
+//   })
+// }
 
 
  

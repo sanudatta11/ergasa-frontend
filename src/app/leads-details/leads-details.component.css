@@ -1,3 +1,9 @@
+.table-wrapper-scroll-y {
+  display: block;
+  max-height: 400px;
+  overflow-y: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
 .side-nav {
 	height:100vh;
 	background-color: #1c1c2b;

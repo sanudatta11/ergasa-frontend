@@ -1,0 +1,9 @@
+applications:
+
+name: ergasia-ng4
+
+memory: 128M
+
+  buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+
+  path: dist

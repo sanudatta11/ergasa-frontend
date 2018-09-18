@@ -23,7 +23,7 @@ export class EnterDetailsComponent implements OnInit {
   req: any;
   userDetails: any;
 
-  firstName: any;
+firstName: any;
 lastName: any;
 email: any;
 phoneNumber: any;

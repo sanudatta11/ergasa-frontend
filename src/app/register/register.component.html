@@ -1,63 +1,27 @@
 <app-navbar></app-navbar>
 <div class="container">
   <div class="layout-centered bg-img body" >
-
-
      <!--Main Content -->
     <main class="main-content">
-
       <div class="bg-white  rounded shadow-7 w-400 mw-100 p-6 " style="height: 100vh !important;">
-        <h5 class="mb-7"><b>Create new user</b></h5>
-
+        <h5 class="mb-7"><b>Create New Company</b></h5>
         <form>
-        
           <div class="form-group">
-            <input type="text" class="form-control" name="fName" placeholder="First Name" [(ngModel)]="fName">
-          </div>
-           <div class="form-group">
-            <input type="text" class="form-control" name="lName" placeholder="Last Name" [(ngModel)]="lName">
+            <input type="text" class="form-control" placeholder="Name of Company...." [(ngModel)]="companyName">
           </div>
           <div class="form-group">
-            <input type="email" class="form-control" name="email" placeholder="Email Id" [(ngModel)]="email">
-          </div>
-          <div class="form-group" *ngIf="typeOfUser ==1">
-            <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="password">
+            <input type="text" class="form-control" placeholder="About the Company...." [(ngModel)]="companyAbout">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" name="number" placeholder="Phone" [(ngModel)]="number">
+            <input type="number" class="form-control" placeholder="Year Founded..." [(ngModel)]="companyYear">
           </div>
-          <div *ngIf="typeOfUser ==1">
-             <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="male" [(ngModel)]="gender">
-            <label class="form-check-label" for="inlineRadio1">Male</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="female" [(ngModel)]="gender">
-            <label class="form-check-label" for="inlineRadio2">Female</label>
-          </div>
-          </div>
-          <div *ngIf="typeOfUser ==2">
-             <select class="custom-select custom-select-sm"  (change)="setEmailTemplate($event)">
-            <option [value] = "0" selected>Select Email Template</option>
-            <option [value]="eachTemplate._id" *ngFor="let eachTemplate of listOfEmailTemplates">{{eachTemplate.name}}</option>
-        </select>
-        <br><br>
-        <select class="custom-select custom-select-sm"  (change)="setSMSTemplate($event)">
-            <option [value] = "0" selected>Select SMS Template</option>
-            <option [value]="eachTemplate._id" *ngFor="let eachTemplate of listOfSMSTemplates">{{eachTemplate.name}}</option>
-        </select>
-        <br><br>
-        <input type="text" class="form-control" name="timeOfSubscription" placeholder="Time of Subscription..." [(ngModel)]="timeOfSubscription">
-        <br>
-         <input type="number" class="form-control" name="countryCode" placeholder="Country Code..." [(ngModel)]="countryCode">
-          </div>
+          <div class="form-group">
+            <input type="number" class="form-control" placeholder="Funding..." [(ngModel)]="companyFunding">
+          </div>          
           <br>
           <br>
-          <div class="form-group" *ngIf="typeOfUser ==1">
-            <button class="btn btn-block btn-primary" type="submit" (click) = "registerToApp()">Create New Sales</button>
-          </div>
-          <div class="form-group" *ngIf="typeOfUser ==2">
-            <button class="btn btn-block btn-primary" type="submit" (click) = "registerToAppLeads()">Create New Leads</button>
+          <div class="form-group" >
+            <button class="btn btn-block btn-primary" type="submit" (click) = "createNewCompany()">Create New Company</button>
           </div>
         </form>
 
