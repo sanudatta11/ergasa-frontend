@@ -48,13 +48,15 @@ const routes: Routes = [
  {path:'register' ,component:RegisterComponent },
  {path:'profile',component:ProfileComponent},
  {path:'',component:LoginSignUpComponent},
- {path:'enter-detail/:id',component:EnterDetailsComponent},
+ {path:'oauth/linkedin/callback',component:EnterDetailsComponent},
  {path:'message-template',component:MessageTemplateComponent},
  {path:'log-page',component:LogPageComponent},
  {path:'config-page',component:ConfigPageComponent},
  {path:'leads-details',component:LeadsDetailsComponent},
  {path:'dashboard',component:DashboardComponent},
  {path:'admin-portal',component:AdminPortalComponent},
+ {path:'admin-portal',component:AdminPortalComponent},
+
  // {path:'**',redirectTo:'app'},
 ];
 // Configs 

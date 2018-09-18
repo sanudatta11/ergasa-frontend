@@ -70,36 +70,35 @@ socialPlatformProvider:any;
 
 
 
-// loginToApp(gAuthStatus : any)
-// {
+loginToApp()
+{
 
-//   console.log("CLICKED");
-//   const httpOptions  = {
-//   headers: new HttpHeaders({
-//      "Content-Type": "application/json"
-//   })
-// };
-// console.log(gAuthStatus);
-// var body = {
-//      'email' : this.email,
-//     'password': this.password,
-// }
+  console.log("CLICKED");
+  const httpOptions  = {
+  headers: new HttpHeaders({
+     "Content-Type": "application/json"
+  })
+};
+var body = {
+     'email' : this.email,
+    'password': this.password,
+}
 
-// console.log("Body : " , body , "httpOptions" , httpOptions);
-// this.req = this.http.post(this.appConstant.LoginUrl + '/login',JSON.stringify(body), httpOptions)
-// .subscribe  (
-//  res => {
-//     this.objRes = res;
-//     console.log("Response: " , this.objRes.token);
-//     this.cookieService.set( 'jwt-token', this.objRes.token );
-//     console.log("cookie during login: " +this.objRes.token  );
-//     this.cookieService.set( 'type-of-user', this.objRes.typeOfUser );
-//     this.router.navigate(["dashboard"]);
-//   },
-//   err => {
-//     alert("Loging Fail");
-//   })
-// }
+console.log("Body : " , body , "httpOptions" , httpOptions);
+this.req = this.http.post(this.appConstant.LoginUrl + '/login',JSON.stringify(body), httpOptions)
+.subscribe  (
+ res => {
+    this.objRes = res;
+    console.log("Response: " , this.objRes.token);
+    this.cookieService.set( 'jwt-token', this.objRes.token );
+    console.log("cookie during login: " +this.objRes.token  );
+    this.cookieService.set( 'type-of-user', this.objRes.typeOfUser );
+    this.router.navigate(["dashboard"]);
+  },
+  err => {
+    alert("Loging Fail");
+  })
+}
 
 
  

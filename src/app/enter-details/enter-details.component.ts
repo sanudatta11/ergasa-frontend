@@ -98,15 +98,13 @@ registerUserFromReference() {
 }
 
   ngOnInit() {
-    this.showSuccessPage = false;
-  	console.log(this.router.url);
-  	this.idOfUser = this.router.url.split('/');
-  	this.idOfUser = this.idOfUser[2];
-    console.log("FINAL ID IS: " + this.idOfUser);
-    this.getUserInfo();
-    window.scrollBy(0, 500);
-
-
+    // this.showSuccessPage = false;
+  	console.log("Router is: " + this.router.url);
+  	// this.idOfUser = this.router.url.split('/');
+  	// this.idOfUser = this.idOfUser[2];
+   //  console.log("FINAL ID IS: " + this.idOfUser);
+   //  this.getUserInfo();
+   //  window.scrollBy(0, 500);
   }
 
 }
