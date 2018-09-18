@@ -103,7 +103,7 @@ loginSignUp() {
   
 
 
- this.req = this.http.get('https://ergasi-nodejs.cfapps.us10.hana.ondemand.com/oauth/linkedin?' +URLParams[1] )
+ this.req = this.http.get('https://ergasi-nodejs.cfapps.us10.hana.ondemand.com/oauth/linkedin/callback/?' +URLParams[1] )
 .subscribe  (
  res => {
    // alert("Success");
