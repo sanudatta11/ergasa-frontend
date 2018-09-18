@@ -48,6 +48,17 @@ export class RegisterComponent implements OnInit {
   companyYear: any;
   companyFunding: any;
 
+
+
+  
+imageURLLink: any;
+resumeLink : any;
+githubLink : any;
+linkedInLink  : any;
+fiverrLink : any;
+codeforcesLink  : any;
+codechefLink : any;
+req:any;
     constructor(private router: Router,
      private cookieService: CookieService,
      private http: HttpClient,
@@ -68,7 +79,41 @@ setSMSTemplate(event) {
 }
 
 
+createNewProfile() {
+ const httpOptions  = {
+  headers: new HttpHeaders({
+    "Content-Type": "application/json",
+    // "Authorization" : this.cookieValue
 
+  })
+};
+// oneDashURL
+
+var body = {
+    
+"imgUrl": this.imageURLLink,
+"resume" : this.resumeLink,
+"github" : this.githubLink,
+"linkedIn": this.linkedInLink,
+"fiverr" : this.fiverrLink,
+"codeforces" : this.codeforcesLink,
+"codechef" : this.codechefLink
+  }
+
+this.req = this.http.post(this.appConstant.oneDashURL + 'api/completeProfile', JSON.stringify(body),httpOptions)
+.subscribe  (
+ res => {
+    alert("Success Register");
+  },
+  err => {
+    // console.log("Error is ");
+    // console.log(err);
+    // console.log("This much only");
+    // console.log("Error Occured in BASIC APi ");
+    alert(err);
+    console.log(err);
+  })
+}
 
  createNewCompany() { 
 console.log("CCCCCCCVVVVVVVVVVV " + this.cookieValue);

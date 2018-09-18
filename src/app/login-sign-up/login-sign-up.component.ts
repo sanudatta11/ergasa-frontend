@@ -39,6 +39,7 @@ password:any;
 cookieValue: any;
 options: any;
 socialPlatformProvider:any;
+isRecruiter:any;
   constructor(
     private router: Router, 
     private cookieService: CookieService,
@@ -67,7 +68,12 @@ socialPlatformProvider:any;
     );
   }
   
+getValueOfChoice() {
+  // console.log(event);
+  this.isRecruiter = !this.isRecruiter;
+    console.log(this.isRecruiter);
 
+}
 
 
 loginToApp()
@@ -80,12 +86,12 @@ loginToApp()
   })
 };
 var body = {
-     'email' : this.email,
+    'email' : this.email,
     'password': this.password,
 }
 
 console.log("Body : " , body , "httpOptions" , httpOptions);
-this.req = this.http.post(this.appConstant.LoginUrl + '/login',JSON.stringify(body), httpOptions)
+this.req = this.http.post(this.appConstant.oneDashURL + 'loginapplicant',JSON.stringify(body), httpOptions)
 .subscribe  (
  res => {
     this.objRes = res;
@@ -94,6 +100,7 @@ this.req = this.http.post(this.appConstant.LoginUrl + '/login',JSON.stringify(bo
     console.log("cookie during login: " +this.objRes.token  );
     this.cookieService.set( 'type-of-user', this.objRes.typeOfUser );
     this.router.navigate(["dashboard"]);
+    
   },
   err => {
     alert("Loging Fail");
@@ -103,6 +110,8 @@ this.req = this.http.post(this.appConstant.LoginUrl + '/login',JSON.stringify(bo
 
  
   ngOnInit() {
+
+    this.isRecruiter = false;
     // console.log("Have a look" , this.appConstant.LoginUrl);
 
   }

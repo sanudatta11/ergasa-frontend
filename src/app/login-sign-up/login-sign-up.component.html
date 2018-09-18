@@ -32,13 +32,17 @@
           </div>
         </form>
               <!-- <button class="bt btn-info " style="margin-left: 70px; background-color: #3b537a; padding: 5px" (click)="socialSignIn('linkedin')">Sign-in in with LinkedIn</button> -->
-              <button><a href="https://ergasi-nodejs.cfapps.us10.hana.ondemand.com/oauth/linkedin/" target="_blank">
+              <button class="btn btn-info"><a href="https://ergasi-nodejs.cfapps.us10.hana.ondemand.com/oauth/linkedin/" style="color: white">
                 Signin in with Linkedin
               </a>
               </button> 
               <button (click)="socialSignIn('google')">Signin in with Google</button>
         <hr class="w-30">
-
+        <div class="form-check">
+  <label class="form-check-label">
+    <input type="checkbox" class="form-check-input" value="" (change) = "getValueOfChoice()">I am a recruiter
+  </label>
+</div>
         <p class="text-center text-muted small-2">Don't have an account? <a href="user-register.html" routerLink="/register">Register here</a></p>
         <br><br><br>
       </div>

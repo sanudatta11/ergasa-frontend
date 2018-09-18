@@ -33,6 +33,8 @@ userId: any;
 salesId: any;
 showSuccessPage: any;
 
+linkedInDetails: any;
+
 
   constructor(
     private router: Router,
@@ -108,8 +110,11 @@ loginSignUp() {
  res => {
    // alert("Success");
    alert("SUCCESS");
+   this.linkedInDetails = res;
+   console.log(this.linkedInDetails);
   },
   err => {
+
     alert("Error in registering");
   })
 }
