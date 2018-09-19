@@ -28,7 +28,7 @@ export class LogPageComponent implements OnInit {
   bestCodeForcesRank: any;
 
   loadCodeForcesData() {
-  this.req = this.http.get("http://codeforces.com/api/user.rating?handle=" + this.codeforcesId)
+  this.req = this.http.get("https://codeforces.com/api/user.rating?handle=" + this.codeforcesId)
   .subscribe  (
    res => {
       console.log(res);
@@ -49,7 +49,7 @@ export class LogPageComponent implements OnInit {
       
     },
     err => {
-      alert("Loading List Failed");
+      alert("Loading List Failed Codeforces");
 
     })
   }  

@@ -62,11 +62,6 @@ const routes: Routes = [
  {path:'applicants',component:ApplicantsComponent},
 
 
-
- 
-
-
-
  // {path:'**',redirectTo:'app'},
 ];
 // Configs 

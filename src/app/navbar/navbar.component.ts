@@ -19,7 +19,6 @@ export class NavbarComponent implements OnInit {
 logoutUser(){
 	console.log("CLICKED");
 	this.cookieService.deleteAll();
-
 }
   ngOnInit() {
   	if(this.cookieService.get('type-of-user')=='1') {
@@ -29,12 +28,5 @@ logoutUser(){
   		this.typeOfAccount = "Sales"
   	}
    this.cookieValue = this.cookieService.get('jwt-token');
-
-  if(this.cookieValue == "") {
-    this.router.navigate([""]);
   }
-
-  }
-
-
 }

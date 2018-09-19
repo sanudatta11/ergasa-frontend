@@ -30,6 +30,7 @@ constructor(
 }
 
 loadDashboard(eachData) {
+  console.log(eachData.userId);
 	this.cookieService.set( 'github-token', eachData.userId.github);
 	this.cookieService.set( 'fiverr-token', eachData.userId.fiverr);
 	this.cookieService.set( 'codeforces-token', eachData.userId.codeforces);
