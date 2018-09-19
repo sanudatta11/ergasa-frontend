@@ -155,17 +155,8 @@ this.req = this.http.post(this.appConstant.oneDashURL + 'api/completeProfile', J
 
     ngOnInit() {
 
-  this.userId = this.cookieService.get('userid-token');
+  // this.userId = this.cookieService.get('userid-token');
 
-// this.cookieValue = this.cookieService.get('jwt-token');
-// console.log("JJJJJJJJJJJWWWWWWWWWTTTTTTTTTTTTT" + this.cookieValue);
-// this.loadSMSTemplates();
-// this.loadEmailTemplates();
-   // console.log("JWT is: " + this.cookieValue);
-   // if(!this.cookieValue)
-   // {
-   //   this.router.navigate([""]);
-   // }
 }
 
 

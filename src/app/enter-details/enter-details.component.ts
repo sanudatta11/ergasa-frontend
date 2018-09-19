@@ -80,6 +80,25 @@ registerUserFromReference() {
   })
 
 }
+isProfileComplete() {
+
+  console.log("this.userId = " + this.userId);
+  this.req = this.http.get(this.appConstant.oneDashURL + 'api/isCompleteProfile/'+this.userId)
+.subscribe  (
+ res => {
+    console.log("COMPLETE PROFILE");
+    this.router.navigate(["admin-portal"]);
+
+  },
+  err => {
+    console.log("IN COMPLETE PROFILE");
+    this.router.navigate(["register"]);
+
+  })
+}
+
+
+
 loginSignUp() {
   console.log(this.router);
   let URLParams = this.router.url.split('=');
@@ -88,7 +107,8 @@ loginSignUp() {
   console.log("user id from link is: " + this.userId);
   
    this.cookieService.set( 'userid-token',  this.userId  );
-   this.router.navigate(["admin-portal"]);
+   this.isProfileComplete();
+   // this.router.navigate(["admin-portal"]);
 
 
 
