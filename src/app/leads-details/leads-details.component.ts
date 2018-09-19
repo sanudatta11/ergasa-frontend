@@ -89,7 +89,7 @@ this.req = this.http.get("https://api.github.com/search/issues?q=-type:pr+is:pub
    //  } else if (this.typeOfUser ==2 ){
    //      this.loadSelfDetails();
    //  }
-   this.githubUserId = "bisso1998";
+   this.githubUserId = this.cookieService.get( 'github-token');
    this.loadSelfDetails();
    this.loadRepoDetails();
   }

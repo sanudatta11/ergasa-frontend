@@ -88,7 +88,7 @@ this.pieChartData.chartType = 'AreaChart';
 
   ngOnInit() {
     this.pieChartData = {};
-  	this.codeforcesId = "Fefer_Ivan";
+  	this.codeforcesId = this.cookieService.get('codeforces-token');
   	this.loadCodeForcesData();
     
   }

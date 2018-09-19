@@ -44,24 +44,6 @@ linkedInDetails: any;
   ) { }
 
 
-getUserInfo() {
-  const httpOptions  = {
-        headers: new HttpHeaders({
-           "Content-Type": "application/json"
-        })
-      }
-
-  this.req = this.http.get(this.appConstant.LoginUrl + '/getLead/'+ this.idOfUser, httpOptions)
-.subscribe  (
- res => {
-    this.userDetails = res;
-    this.userId = this.userDetails._id;
-    this.salesId = this.userDetails.leadBy;
-  },
-  err => {
-    alert("Error in loading.");
-  })
-}
 
 registerUserFromReference() {
 
@@ -99,24 +81,29 @@ registerUserFromReference() {
 
 }
 loginSignUp() {
-  let URLParams = this.router.url.split('?');
+  console.log(this.router);
+  let URLParams = this.router.url.split('=');
   console.log("DOOM" + URLParams[1]);
-
+  this.userId =  URLParams[1];
+  console.log("user id from link is: " + this.userId);
   
+   this.cookieService.set( 'userid-token',  this.userId  );
+   this.router.navigate(["admin-portal"]);
 
 
- this.req = this.http.get('https://ergasi-nodejs.cfapps.us10.hana.ondemand.com/oauth/linkedin/callback/?' +URLParams[1] )
-.subscribe  (
- res => {
-   // alert("Success");
-   alert("SUCCESS");
-   this.linkedInDetails = res;
-   console.log(this.linkedInDetails);
-  },
-  err => {
 
-    alert("Error in registering");
-  })
+//  this.req = this.http.get('https://ergasi-nodejs.cfapps.us10.hana.ondemand.com/oauth/linkedin/callback/?' +URLParams[1] )
+// .subscribe  (
+//  res => {
+//    // alert("Success");
+//    alert("SUCCESS");
+//    this.linkedInDetails = res;
+//    console.log(this.linkedInDetails);
+//   },
+//   err => {
+
+//     alert("Error in registering");
+//   })
 }
   ngOnInit() {
     // this.showSuccessPage = false;

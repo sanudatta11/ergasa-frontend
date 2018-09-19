@@ -1,0 +1,34 @@
+<app-navbar></app-navbar>
+<div class="container">
+  
+    <h5 class="text"><b>List of all Applicants</b></h5>
+<!-- <p  *ngIf="shouldShowPreLoader">Loading all leads.......</p> -->
+
+          <table class="table" >   
+            <thead>
+              <tr>
+                <th class="text text-center">Name</th>
+                <th class="text text-center">Applied At</th>
+                <th class="text text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let eachData of listOfAllApplicants">
+                <td class="text text-center">{{eachData.userId.firstName}} {{eachData.userId.lastName}}</td>
+                <td class="text text-center">{{eachData.createdAt | date:'medium'}}</td>
+                <td class="text text-center">
+                  <button class="btn btn-primary btn-sm" (click)="loadDashboard(eachData)">View Complete Profile</button>
+                </td>
+
+              <!--   <td class="text text-center">
+                  {{ eachData.createdAt | date [ : format [ : timezone [ : locale ] ] ] }}
+                </td> -->
+
+<!-- console.log(ts.);
+ -->
+              <td class="text text-center">{{eachData.leads}}</td>
+              </tr>
+            </tbody>
+          </table>      
+
+</div>       

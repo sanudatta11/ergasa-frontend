@@ -39,7 +39,8 @@ import {
     AuthServiceConfig,
     LinkedinLoginProvider
 } from "angular5-social-auth";
-import { CreateProfileComponent } from './create-profile/create-profile.component'
+import { CreateProfileComponent } from './create-profile/create-profile.component';
+import { ApplicantsComponent } from './applicants/applicants.component'
 
 
 
@@ -49,7 +50,7 @@ const routes: Routes = [
  {path:'register' ,component:RegisterComponent },
  {path:'profile',component:ProfileComponent},
  {path:'',component:LoginSignUpComponent},
- {path:'oauth/linkedin/callback',component:EnterDetailsComponent},
+ {path:'oauth/callback/successful',component:EnterDetailsComponent},
  {path:'message-template',component:MessageTemplateComponent},
  {path:'log-page',component:LogPageComponent},
  {path:'config-page',component:ConfigPageComponent},
@@ -58,6 +59,8 @@ const routes: Routes = [
  {path:'admin-portal',component:AdminPortalComponent},
  {path:'admin-portal',component:AdminPortalComponent},
  {path:'create-profile',component:CreateProfileComponent},
+ {path:'applicants',component:ApplicantsComponent},
+
 
 
  
@@ -95,6 +98,7 @@ export function getAuthServiceConfigs() {
     ShowLeadsComponent,
     AdminPortalComponent,
     CreateProfileComponent,
+    ApplicantsComponent,
 
   ],
   imports: [

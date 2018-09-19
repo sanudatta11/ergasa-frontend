@@ -28,6 +28,7 @@ export class ConfigPageComponent implements OnInit {
 
   codeChefDetailsObject: any;
   fiverrDetailsObject: any;
+  codeChefUserId: any;
 
   codeChefUser: any;
 	loadAllConfigs() {
@@ -86,8 +87,9 @@ loadCodeChefdata() {
            // "Authorization" : this.cookieValue
         })
     };
-
-     this.req = this.http.get('https://ergasi-nodejs.cfapps.us10.hana.ondemand.com/api/getCodechefProfile/sanurocks5',httpOptions)
+    let tmpCodeChefId = this.cookieService.get('codechef-token');
+    console.log("199819 : " + tmpCodeChefId);
+     this.req = this.http.get('https://ergasi-nodejs.cfapps.us10.hana.ondemand.com/api/getCodechefProfile/' + tmpCodeChefId,httpOptions)
       .subscribe  (
        res => {
            this.codeChefDetailsObject = res;
@@ -107,8 +109,9 @@ loadFiverrData() {
            // "Authorization" : this.cookieValue
         })
     };
+    let tmpFiverrId = this.cookieService.get('fiverr-token');
 
-     this.req = this.http.get('https://ergasi-nodejs.cfapps.us10.hana.ondemand.com/api/getFiverrProfile/soumyajitdutta',httpOptions)
+     this.req = this.http.get('https://ergasi-nodejs.cfapps.us10.hana.ondemand.com/api/getFiverrProfile/' +tmpFiverrId,httpOptions)
       .subscribe  (
        res => {
            this.fiverrDetailsObject = res;
@@ -134,6 +137,8 @@ loadFiverrData() {
   	this.loadAllConfigs();
     this.loadCodeChefdata();
     this.loadFiverrData();
+    this.codeChefUserId = this.cookieService.get('codechef-token');
+    console.log("From config File : " + this.codeChefUserId);
     this.shouldLoadPreLoader = true;
   }
 
