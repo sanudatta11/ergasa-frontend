@@ -22,31 +22,31 @@ import { AppConstant } from '../app-constants';
 export class RegisterComponent implements OnInit {
 
   req:any;
-  objRes: any;
-  username: any;
-  fName:any;
-  lName:any;
-  email:any;
-  password:any;
-  number:any;
-  gender:any;
-  type:any;
-  userStatus:any;
-  cookieValue:any;
-  options: any;
-  listOfEmailTemplates: any;
-  listOfSMSTemplates: any;
-  typeOfUser: any;
+  // objRes: any;
+  // username: any;
+  // fName:any;
+  // lName:any;
+  // email:any;
+  // password:any;
+  // number:any;
+  // gender:any;
+  // type:any;
+  // userStatus:any;
+  // cookieValue:any;
+  // options: any;
+  // listOfEmailTemplates: any;
+  // listOfSMSTemplates: any;
+  // typeOfUser: any;
 
-  emailTemplateId: any;
-  smsTemplateId: any;
-  timeOfSubscription: any;
-  countryCode: any;
+  // emailTemplateId: any;
+  // smsTemplateId: any;
+  // timeOfSubscription: any;
+  // countryCode: any;
 
-  companyName: any;
-  companyAbout: any;
-  companyYear: any;
-  companyFunding: any;
+  // companyName: any;
+  // companyAbout: any;
+  // companyYear: any;
+  // companyFunding: any;
 
 
 
@@ -58,8 +58,9 @@ linkedInLink  : any;
 fiverrLink : any;
 codeforcesLink  : any;
 codechefLink : any;
-req:any;
-    constructor(private router: Router,
+userId: any;
+    constructor(
+      private router: Router,
      private cookieService: CookieService,
      private http: HttpClient,
      public appConstant: AppConstant, 
@@ -68,15 +69,15 @@ req:any;
       console.log("Constructor is being called");
     }
 
-setEmailTemplate(event) {
-  this.emailTemplateId = event.target.value;
-  console.log(this.emailTemplateId);
-};
-setSMSTemplate(event) {
-  this.smsTemplateId = event.target.value;
-  console.log(this.smsTemplateId);
+// setEmailTemplate(event) {
+//   this.emailTemplateId = event.target.value;
+//   console.log(this.emailTemplateId);
+// };
+// setSMSTemplate(event) {
+//   this.smsTemplateId = event.target.value;
+//   console.log(this.smsTemplateId);
 
-}
+// }
 
 
 createNewProfile() {
@@ -87,7 +88,6 @@ createNewProfile() {
 
   })
 };
-// oneDashURL
 
 var body = {
     
@@ -97,9 +97,10 @@ var body = {
 "linkedIn": this.linkedInLink,
 "fiverr" : this.fiverrLink,
 "codeforces" : this.codeforcesLink,
-"codechef" : this.codechefLink
+"codechef" : this.codechefLink,
+"userId" :  this.userId
   }
-
+console.log("BODY IS: " , body);
 this.req = this.http.post(this.appConstant.oneDashURL + 'api/completeProfile', JSON.stringify(body),httpOptions)
 .subscribe  (
  res => {
@@ -115,148 +116,56 @@ this.req = this.http.post(this.appConstant.oneDashURL + 'api/completeProfile', J
   })
 }
 
- createNewCompany() { 
-console.log("CCCCCCCVVVVVVVVVVV " + this.cookieValue);
+//  createNewCompany() { 
+// console.log("CCCCCCCVVVVVVVVVVV " + this.cookieValue);
 
-  const httpOptions  = {
-  headers: new HttpHeaders({
-    "Content-Type": "application/json",
-    // "Authorization" : this.cookieValue
+//   const httpOptions  = {
+//   headers: new HttpHeaders({
+//     "Content-Type": "application/json",
+//     // "Authorization" : this.cookieValue
 
-  })
-};
-// oneDashURL
+//   })
+// };
+// // oneDashURL
 
-var body = {
-    "name": this.companyName,
-    "about": this.companyAbout,
-    "yearFounded": this.companyYear,
-    "funding": this.companyFunding,
-  }
+// var body = {
+//     "name": this.companyName,
+//     "about": this.companyAbout,
+//     "yearFounded": this.companyYear,
+//     "funding": this.companyFunding,
+//   }
 
-this.req = this.http.post(this.appConstant.oneDashURL + 'api/createCompany', JSON.stringify(body),httpOptions)
-.subscribe  (
- res => {
-    alert("Success Register");
-  },
-  err => {
-    // console.log("Error is ");
-    // console.log(err);
-    // console.log("This much only");
-    // console.log("Error Occured in BASIC APi ");
-    alert(err);
-    console.log(err);
-  })
-  }
+// this.req = this.http.post(this.appConstant.oneDashURL + 'api/createCompany', JSON.stringify(body),httpOptions)
+// .subscribe  (
+//  res => {
+//     alert("Success Register");
+//   },
+//   err => {
+//     // console.log("Error is ");
+//     // console.log(err);
+//     // console.log("This much only");
+//     // console.log("Error Occured in BASIC APi ");
+//     alert(err);
+//     console.log(err);
+//   })
+//   }
 
-  registerToAppLeads() {
-
-
-  const httpOptions  = {
-  headers: new HttpHeaders({
-    "Content-Type": "application/json",
-    "Authorization" : this.cookieValue
-
-  })
-};
-
-var body = {
-    "firstName": this.fName,
-    "lastName": this.lName,
-    "email": this.email,
-    "phone":this.number,
-    "smsTemplateId" : this.smsTemplateId,
-    "emailTemplateId": this.emailTemplateId,
-    "timeOfSubscription": this.timeOfSubscription,
-    "countryCode" : this.countryCode
-  }
-
-  console.log(body);
-
-  this.req = this.http.post(this.appConstant.LoginUrl + '/api/createUser', JSON.stringify(body),httpOptions)
-.subscribe  (
- res => {
-    alert("Success Register");
-  },
-  err => {
-    // console.log("Error is ");
-    // console.log(err);
-    // console.log("This much only");
-    // console.log("Error Occured in BASIC APi ");
-    alert(err);
-    console.log(err);
-  })
-
-
-
-  }
-
-  loadEmailTemplates() {
-      const httpOptions  = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Authorization" : this.cookieValue
-
-      })
-    };
-    this.req = this.http.get(this.appConstant.LoginUrl + '/api/getEmailTemplate',httpOptions)
-    .subscribe  (
-     res => {
-       this.listOfEmailTemplates = res;
-       console.log(this.listOfEmailTemplates);
-
-      },
-      err => {
-        // console.log("Error is ");
-        // console.log(err);
-        // console.log("This much only");
-        // console.log("Error Occured in BASIC APi ");
-        alert(err);
-        console.log(err);
-      })
-
-  }
-
-  loadSMSTemplates() {
-      const httpOptions  = {
-  headers: new HttpHeaders({
-    "Content-Type": "application/json",
-    "Authorization" : this.cookieValue
-
-  })
-};
-
-this.req = this.http.get(this.appConstant.LoginUrl + '/api/getSMSTemplate',httpOptions)
-    .subscribe  (
-     res => {
-       this.listOfSMSTemplates = res;
-       console.log(this.listOfSMSTemplates);
-      },
-      err => {
-        // console.log("Error is ");
-        // console.log(err);
-        // console.log("This much only");
-        // console.log("Error Occured in BASIC APi ");
-        alert(err);
-        console.log(err);
-      })
-  }
 
 
 
     ngOnInit() {
 
-  this.typeOfUser = this.cookieService.get('type-of-user');
+  this.userId = this.cookieService.get('userid-token');
 
-this.cookieValue = this.cookieService.get('jwt-token');
-console.log("JJJJJJJJJJJWWWWWWWWWTTTTTTTTTTTTT" + this.cookieValue);
-this.loadSMSTemplates();
-this.loadEmailTemplates();
-   console.log("JWT is: " + this.cookieValue);
-   if(!this.cookieValue)
-   {
-     this.router.navigate([""]);
-   }
+// this.cookieValue = this.cookieService.get('jwt-token');
+// console.log("JJJJJJJJJJJWWWWWWWWWTTTTTTTTTTTTT" + this.cookieValue);
+// this.loadSMSTemplates();
+// this.loadEmailTemplates();
+   // console.log("JWT is: " + this.cookieValue);
+   // if(!this.cookieValue)
+   // {
+   //   this.router.navigate([""]);
+   // }
 }
 
 

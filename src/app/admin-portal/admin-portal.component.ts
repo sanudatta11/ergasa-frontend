@@ -40,7 +40,66 @@ export class AdminPortalComponent implements OnInit {
 
     listOfCompanies: any;
 
+    jobId: any;
+    companyid: any;
+    questionOneId: any;
+    questionTwoId: any;
+    userId: any;
 
+    questionOne: any;
+    questionTwo: any;
+
+applyToTheJob() {
+     const httpOptions  = {
+        headers: new HttpHeaders({
+           "Content-Type": "application/json",
+            // "Authorization" : this.cookieValue
+
+        })
+      };
+  var body = {
+  "companyId":  this.companyid,
+  "jobId":  this.jobId,
+  "userId": this.userId ,
+  "answers": [
+    {
+      "question": this.questionOneId,
+      "answer": this.questionOne
+    },
+    {
+      "question": this.questionTwoId,
+      "answer": this.questionTwo
+    }
+  ]
+}
+
+console.log("BOSY OF APPLY IS: " , body);
+
+
+this.req = this.http.post(this.appConstant.oneDashURL + 'api/applyjob',JSON.stringify(body), httpOptions)
+.subscribe  (
+ res => {
+   alert("Successfully applied!");
+  },
+  err => {
+    alert("Job apply failed");
+  })
+
+} 
+
+
+
+
+
+
+setDetailsForModalApply(jobId,companyId,questionOne,questionTwo) {
+  console.log("Opening Modal " + jobId + " " + companyId + " "  + questionOne + " " + questionTwo);
+    this.jobId = jobId;
+    this.companyid = companyId;
+    this.questionOneId = questionOne;
+    this.questionTwoId = questionTwo;
+
+}
 
     createAdmin() {
       const httpOptions  = {
@@ -80,7 +139,7 @@ export class AdminPortalComponent implements OnInit {
         })
       };
 
- this.req = this.http.get('https://ergasi-nodejs.cfapps.us10.hana.ondemand.com/api/getCompany', httpOptions)
+ this.req = this.http.get('https://ergasi-nodejs.cfapps.us10.hana.ondemand.com/api/getjobs', httpOptions)
 .subscribe  (
  res => {
    this.listOfCompanies = res;
@@ -126,6 +185,7 @@ export class AdminPortalComponent implements OnInit {
   ngOnInit() {
      // this.cookieValue = this.cookieService.get('jwt-token');
      // this.loadAllCompanies();
+       this.userId = this.cookieService.get('userid-token');
      this.loadAllCompanies();
   }
 

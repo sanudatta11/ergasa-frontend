@@ -40,6 +40,7 @@ cookieValue: any;
 options: any;
 socialPlatformProvider:any;
 isRecruiter:any;
+idOfUser: any;
   constructor(
     private router: Router, 
     private cookieService: CookieService,
@@ -75,7 +76,20 @@ getValueOfChoice() {
 
 }
 
+isProfileComplete() {
+  this.req = this.http.get(this.appConstant.oneDashURL + 'api/isCompleteProfile/'+this.idOfUser)
+.subscribe  (
+ res => {
+    console.log("COMPLETE PROFILE");
+    this.router.navigate(["admin-portal"]);
 
+  },
+  err => {
+    console.log("IN COMPLETE PROFILE");
+    this.router.navigate(["register"]);
+
+  })
+}
 loginToApp()
 {
 
@@ -91,7 +105,27 @@ var body = {
 }
 
 console.log("Body : " , body , "httpOptions" , httpOptions);
-this.req = this.http.post(this.appConstant.oneDashURL + 'loginapplicant',JSON.stringify(body), httpOptions)
+
+if(!this.isRecruiter){
+  this.req = this.http.post(this.appConstant.oneDashURL + 'loginapplicant',JSON.stringify(body), httpOptions)
+.subscribe  (
+ res => {
+    this.objRes = res;
+    console.log("Response: " , this.objRes.token);
+    this.cookieService.set( 'jwt-token', this.objRes.token );
+    console.log("cookie during login: " +this.objRes.token  );
+    this.cookieService.set( 'type-of-user', this.objRes.typeOfUser );
+    // this.router.navigate(["dashboard"]);
+    this.idOfUser = this.objRes.userId;
+    this.cookieService.set( 'userid-token',  this.idOfUser  );
+    this.isProfileComplete();
+  },
+  err => {
+    alert("Loging Fail");
+  })
+}
+else {
+   this.req = this.http.post(this.appConstant.oneDashURL + 'loginRecruiter',JSON.stringify(body), httpOptions)
 .subscribe  (
  res => {
     this.objRes = res;
@@ -100,11 +134,12 @@ this.req = this.http.post(this.appConstant.oneDashURL + 'loginapplicant',JSON.st
     console.log("cookie during login: " +this.objRes.token  );
     this.cookieService.set( 'type-of-user', this.objRes.typeOfUser );
     this.router.navigate(["dashboard"]);
-    
+
   },
   err => {
     alert("Loging Fail");
   })
+}
 }
 
 

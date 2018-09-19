@@ -34,14 +34,14 @@
 
 <div class="container">
   
-    <h5 class="text"><b>List of all Companies</b></h5>
+    <h5 class="text"><b>List of all Jobs</b></h5>
 <!-- <p  *ngIf="shouldShowPreLoader">Loading all leads.......</p> -->
 
           <table class="table" >   
             <thead>
               <tr>
                 <th class="text text-center">Company Name</th>
-                <th class="text text-center">Funding</th>
+                <th class="text text-center">Salary</th>
                 <th class="text text-center">Job Posted At</th>
                 <th class="text text-center">Action</th>
 
@@ -49,11 +49,11 @@
             </thead>
             <tbody>
               <tr *ngFor="let eachData of listOfCompanies">
-                <td class="text text-center">{{eachData.name}} ({{eachData.yearFounded}})</td>
-                <td class="text text-center">{{eachData.funding}}</td>
+                <td class="text text-center">{{eachData.name}}</td>
+                <td class="text text-center">{{eachData.salary}}</td>
                 <td class="text text-center">{{eachData.createdAt | date:'medium'}}</td>
                 <td class="text text-center">
-                  <button class="btn btn-info btn-sm">View Details</button>
+                  <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" (click)="setDetailsForModalApply(eachData._id,eachData.companyId._id,eachData.questions[0],eachData.questions[1])">View Details</button>
                 </td>
 
               <!--   <td class="text text-center">
@@ -68,3 +68,31 @@
           </table>      
 
 </div>       
+
+
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+          <p><b>Apply To the Job</b></p>
+          <hr>
+          <div class="form-group">
+            <p>Why should we hire you?</p>
+            <input type="text" class="form-control" placeholder="Write your answer here...." [(ngModel)]="questionOne">
+          </div>
+          <div class="form-group">
+            <p>Why are you a good fit?</p>
+
+            <input type="text" class="form-control" placeholder="Write your answer here...." [(ngModel)]="questionTwo">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" (click) = "applyToTheJob()">Apply</button>
+          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>  
